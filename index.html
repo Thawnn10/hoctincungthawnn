@@ -50,12 +50,8 @@ body::after{
     radial-gradient(ellipse at 20% 90%,rgba(34,211,238,.07),transparent 50%);
 }
 #app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
-
-/* touch feedback */
-button,.option,.chip,.mode-card,.lesson-pill,.qnav-dot,.tf-btn,.flag-btn,.icon-btn,.nav-btn{
-  touch-action:manipulation;
-  -webkit-user-select:none;user-select:none;
-  -webkit-touch-callout:none;
+button,.option,.chip,.mode-card,.lesson-pill,.qnav-dot,.tf-btn,.flag-btn,.icon-btn,.nav-btn,.bin-cell{
+  touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
 }
 
 /* ===== HEADER ===== */
@@ -177,7 +173,8 @@ nav{display:flex;align-items:center;gap:8px}
 .section-title p{color:var(--t2);font-size:.95rem}
 
 /* ===== MODE CARDS ===== */
-.modes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.modes-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:720px){.modes-grid{grid-template-columns:repeat(2,1fr);gap:20px}}
 .mode-card{
   background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);
   padding:28px;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);
@@ -260,21 +257,16 @@ nav{display:flex;align-items:center;gap:8px}
   font-variant-numeric:tabular-nums;
 }
 .quiz-timer strong{color:var(--t1);font-weight:600}
-
 .progress-wrap{margin-top:14px;width:100%}
-.progress-bar{
-  height:6px;border-radius:100px;background:var(--glass2);overflow:hidden;position:relative;
-}
+.progress-bar{height:6px;border-radius:100px;background:var(--glass2);overflow:hidden;position:relative}
 .progress-fill{
   height:100%;border-radius:100px;
   background:linear-gradient(90deg,var(--acc),var(--lav),var(--cy));
   transition:width .4s cubic-bezier(.4,0,.2,1);
   box-shadow:0 0 12px rgba(77,124,255,.5);
 }
-
 .question-area{animation:slideIn .35s cubic-bezier(.4,0,.2,1)}
 @keyframes slideIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
-
 .q-card{
   background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);
   padding:32px;backdrop-filter:blur(20px) saturate(180%);
@@ -292,7 +284,6 @@ nav{display:flex;align-items:center;gap:8px}
 .q-tag.lesson{background:rgba(77,124,255,.15);color:var(--acc);border-color:rgba(77,124,255,.3)}
 .q-text{font-size:1.15rem;font-weight:500;line-height:1.7;margin-bottom:24px;color:var(--t1)}
 @media(max-width:640px){.q-text{font-size:1.02rem}}
-
 .options{display:flex;flex-direction:column;gap:12px}
 .option{
   display:flex;align-items:flex-start;gap:14px;padding:16px 20px;
@@ -315,7 +306,6 @@ nav{display:flex;align-items:center;gap:8px}
 }
 .option.selected .option-letter{background:linear-gradient(135deg,var(--acc),var(--lav));color:#fff;border-color:transparent}
 .option-text{flex:1;padding-top:3px}
-
 .tf-stem{font-size:1.05rem;font-weight:500;line-height:1.7;margin-bottom:22px;color:var(--t1)}
 .tf-list{display:flex;flex-direction:column;gap:14px}
 .tf-item{
@@ -342,7 +332,6 @@ nav{display:flex;align-items:center;gap:8px}
 .tf-btn:active{transform:scale(.95)}
 .tf-btn.selected-true{background:rgba(16,185,129,.15);border-color:var(--ok);color:var(--ok)}
 .tf-btn.selected-false{background:rgba(239,68,68,.15);border-color:var(--bad);color:var(--bad)}
-
 .q-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
 .q-actions-left,.q-actions-right{display:flex;gap:10px;flex-wrap:wrap}
 .flag-btn{
@@ -353,8 +342,6 @@ nav{display:flex;align-items:center;gap:8px}
 }
 .flag-btn:hover{color:var(--t1);border-color:var(--gb2)}
 .flag-btn.flagged{background:rgba(245,158,11,.15);border-color:var(--warn);color:var(--warn)}
-
-/* question nav dots */
 .qnav{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:22px;padding:16px;background:var(--glass);border:1px solid var(--gb);border-radius:var(--r-sm)}
 .qnav-dot{
   width:34px;height:34px;border-radius:9px;border:1.5px solid var(--gb);
@@ -388,7 +375,6 @@ nav{display:flex;align-items:center;gap:8px}
 }
 .result-stat-label{font-size:.75rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:6px}
 .result-stat-value{font-size:1.5rem;font-weight:700}
-
 .breakdown{background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);padding:24px;margin-bottom:24px;backdrop-filter:blur(20px)}
 .breakdown h3{font-size:1.1rem;margin-bottom:18px;font-weight:700}
 .bd-item{display:flex;align-items:center;gap:12px;margin-bottom:14px}
@@ -397,7 +383,6 @@ nav{display:flex;align-items:center;gap:8px}
 .bd-bar{flex:1;height:8px;background:var(--glass2);border-radius:100px;overflow:hidden}
 .bd-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--lav));border-radius:100px;transition:width .8s ease}
 .bd-val{font-size:.8rem;color:var(--t1);font-weight:600;min-width:70px;text-align:right;font-variant-numeric:tabular-nums}
-
 .review-list{display:flex;flex-direction:column;gap:12px}
 .review-item{
   background:var(--glass);border:1px solid var(--gb);border-radius:var(--r-sm);
@@ -415,8 +400,201 @@ nav{display:flex;align-items:center;gap:8px}
 .rv-a{font-size:.85rem;color:var(--t2);margin-bottom:4px;line-height:1.5}
 .rv-a strong{color:var(--t1)}
 .rv-exp{font-size:.82rem;color:var(--t3);margin-top:8px;padding:10px 12px;background:rgba(77,124,255,.06);border-radius:8px;border-left:2px solid var(--acc);line-height:1.5}
-
 .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+
+/* ===== BINARY PRACTICE ===== */
+.bin-score-bar{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;
+}
+.bin-score-item{
+  background:var(--glass2);border:1px solid var(--gb);border-radius:12px;
+  padding:8px 16px;font-size:.82rem;color:var(--t2);
+}
+.bin-score-item strong{color:var(--t1);font-size:1rem;margin-left:4px;font-weight:700}
+
+.bin-rules{
+  background:var(--glass);border:1px solid var(--gb);border-radius:var(--r-sm);
+  padding:16px 20px;margin-bottom:18px;backdrop-filter:blur(16px);
+}
+.bin-rules summary{
+  cursor:pointer;font-weight:600;font-size:1rem;padding:4px 0;
+  list-style:none;display:flex;align-items:center;gap:8px;color:var(--t1);
+}
+.bin-rules summary::-webkit-details-marker{display:none}
+.bin-rules summary::before{
+  content:'▸';display:inline-block;transition:transform .2s;color:var(--acc);
+  font-size:1.1rem;
+}
+.bin-rules[open] summary::before{transform:rotate(90deg)}
+.bin-rules-content{margin-top:12px;animation:fadeIn .3s}
+.bin-rules p{color:var(--t2);font-size:.88rem;margin:8px 0;line-height:1.6}
+.bin-rules p strong{color:var(--t1)}
+.bin-rules-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:8px;margin:12px 0;
+}
+.bin-rule-item{
+  background:var(--glass2);border:1px solid var(--gb);border-radius:10px;
+  padding:8px 12px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:.9rem;text-align:center;color:var(--t2);
+}
+.bin-rule-item .op{color:var(--acc);font-weight:600}
+.bin-rule-item .res{color:var(--ok);font-weight:700}
+
+.bin-example{
+  background:var(--glass2);border:1px solid var(--gb);border-radius:10px;
+  padding:12px 16px;margin:10px 0;overflow-x:auto;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Courier New',monospace;
+  font-size:.88rem;line-height:1.7;color:var(--t1);white-space:pre;
+}
+
+.bin-difficulty{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;justify-content:center}
+.bin-difficulty .chip{min-height:38px;padding:8px 16px}
+
+.bin-problem-card{
+  background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);
+  padding:24px;margin-bottom:18px;backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:var(--shadow);
+}
+@media(max-width:640px){.bin-problem-card{padding:18px 14px}}
+
+.bin-problem-desc{
+  text-align:center;color:var(--t2);font-size:.85rem;margin-bottom:18px;
+}
+.bin-problem-desc strong{color:var(--t1);font-family:ui-monospace,monospace}
+
+.bin-grid{
+  display:grid;gap:6px;align-items:center;justify-content:center;
+  max-width:520px;margin:0 auto;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Courier New',monospace;
+}
+.bin-cell{
+  height:48px;min-width:40px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;font-weight:700;border-radius:10px;
+}
+.bin-cell.label{
+  color:var(--t2);font-size:1.05rem;justify-content:flex-end;
+  padding-right:6px;border:none;background:transparent;
+}
+.bin-cell.label.plus{color:var(--acc)}
+.bin-cell.carry{
+  height:28px;font-size:.9rem;color:var(--warn);font-weight:700;
+  border:none;background:transparent;
+}
+.bin-cell.operand{
+  background:var(--glass2);border:1.5px solid var(--gb);color:var(--t1);
+}
+.bin-divider{
+  grid-column:1 / -1;height:2px;background:var(--gb2);
+  margin:4px 0;border-radius:2px;
+}
+.bin-cell.answer{
+  background:rgba(77,124,255,.12);
+  border:2px dashed rgba(77,124,255,.5);
+  color:var(--acc);cursor:pointer;transition:all .2s;
+  font-family:inherit;padding:0;font-weight:700;
+}
+.bin-cell.answer:hover:not(:disabled){
+  background:rgba(77,124,255,.22);border-color:var(--acc);
+}
+.bin-cell.answer:active:not(:disabled){transform:scale(.92)}
+.bin-cell.answer.filled{
+  background:linear-gradient(135deg,var(--acc),var(--lav));
+  color:#fff;border-style:solid;border-color:transparent;
+  box-shadow:0 4px 12px rgba(77,124,255,.35);
+}
+.bin-cell.answer.correct{
+  background:linear-gradient(135deg,var(--ok),#059669)!important;
+  border-color:transparent!important;color:#fff!important;
+  box-shadow:0 4px 12px rgba(16,185,129,.4);
+}
+.bin-cell.answer.wrong{
+  background:linear-gradient(135deg,var(--bad),#b91c1c)!important;
+  border-color:transparent!important;color:#fff!important;
+  box-shadow:0 4px 12px rgba(239,68,68,.4);
+}
+.bin-cell.answer:disabled{cursor:default}
+
+.bin-hint{
+  text-align:center;font-size:.82rem;color:var(--t3);
+  margin:16px 0 0;line-height:1.5;
+}
+.bin-hint code{
+  background:var(--glass2);padding:2px 8px;border-radius:6px;
+  font-family:ui-monospace,monospace;color:var(--t1);
+}
+
+.bin-actions{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:24px;
+}
+.bin-actions .btn{min-width:140px}
+
+.bin-feedback{
+  background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);
+  padding:20px;margin-bottom:18px;backdrop-filter:blur(16px);
+  animation:fadeIn .35s;
+}
+.bin-feedback.correct{
+  border-color:rgba(16,185,129,.4);
+  background:linear-gradient(180deg,rgba(16,185,129,.06),var(--glass));
+}
+.bin-feedback.wrong{
+  border-color:rgba(239,68,68,.4);
+  background:linear-gradient(180deg,rgba(239,68,68,.06),var(--glass));
+}
+.bin-feedback h3{
+  font-size:1.1rem;margin-bottom:10px;display:flex;
+  align-items:center;gap:8px;font-weight:700;
+}
+.bin-feedback h3.ok{color:var(--ok)}
+.bin-feedback h3.bad{color:var(--bad)}
+.bin-feedback .fb-msg{
+  color:var(--t2);font-size:.9rem;margin-bottom:14px;line-height:1.6;
+}
+.bin-feedback .fb-msg strong{color:var(--t1)}
+.bin-feedback .fb-msg code{
+  background:var(--glass2);padding:2px 8px;border-radius:6px;
+  font-family:ui-monospace,monospace;
+}
+
+.bin-steps{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.bin-step{
+  padding:10px 14px;border-radius:10px;
+  background:var(--glass2);border-left:3px solid var(--gb2);
+  font-size:.86rem;
+}
+.bin-step.ok{
+  border-left-color:var(--ok);
+  background:rgba(16,185,129,.06);
+}
+.bin-step.bad{
+  border-left-color:var(--bad);
+  background:rgba(239,68,68,.08);
+}
+.bin-step .step-header{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;margin-bottom:4px;font-weight:600;color:var(--t1);
+  font-size:.88rem;line-height:1.4;
+}
+.bin-step .step-header strong{
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  color:var(--t1);
+}
+.bin-step .mark{
+  font-size:1.05rem;font-weight:800;flex-shrink:0;
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+}
+.bin-step .mark.ok{color:#fff;background:var(--ok)}
+.bin-step .mark.bad{color:#fff;background:var(--bad)}
+.bin-step .step-detail{
+  color:var(--t2);font-size:.82rem;line-height:1.5;
+  font-family:inherit;
+}
+.bin-step .step-detail strong{color:var(--t1);font-family:ui-monospace,monospace}
+.bin-step .step-detail .warn-text{color:var(--bad);font-weight:600}
 
 /* ===== MODAL ===== */
 .modal-backdrop{
@@ -458,7 +636,6 @@ footer strong{color:var(--t2)}
 .hidden{display:none!important}
 .text-center{text-align:center}
 .mt-8{margin-top:8px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}
-.flex-between{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -467,49 +644,29 @@ footer strong{color:var(--t2)}
 /* ============================================================
    MOBILE OPTIMIZATIONS
    ============================================================ */
-
-/* ===== Tablet & Mobile ≤ 768px ===== */
 @media (max-width: 768px){
   :root{--header-h:58px;}
-
-  /* Header compact */
-  header{
-    padding:10px 16px;
-    padding-top:calc(10px + var(--safe-top));
-  }
+  header{padding:10px 16px;padding-top:calc(10px + var(--safe-top));}
   .logo-sub{display:none}
   .logo-mark{width:34px;height:34px;border-radius:11px}
   .logo-text{font-size:1.05rem;letter-spacing:1.5px}
   .nav-btn{padding:8px 12px;font-size:.82rem;min-height:40px}
   .icon-btn{width:42px;height:42px;font-size:1rem}
-
-  /* Container */
   .container{padding:24px 16px 60px}
-
-  /* Hero */
   .hero{padding:16px 0 32px}
   .hero-badge{font-size:.72rem;padding:5px 12px;margin-bottom:18px}
   .hero h1{font-size:clamp(1.85rem,7.5vw,2.6rem);margin-bottom:14px}
   .hero p{font-size:.95rem;margin-bottom:24px}
   .hero-actions{flex-direction:column;align-items:stretch}
   .hero-actions .btn{width:100%;min-height:52px}
-
-  /* Stats — 2 cột */
-  .stats-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;margin:32px 0;
-  }
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:12px;margin:32px 0}
   .stat-card{padding:16px;border-radius:18px}
   .stat-label{font-size:.66rem;letter-spacing:1px;margin-bottom:6px}
   .stat-value{font-size:1.55rem}
   .stat-value small{font-size:.78rem}
-
-  /* Section title */
   .section-title{margin:40px 0 20px}
   .section-title h2{font-size:1.5rem}
   .section-title p{font-size:.88rem}
-
-  /* Modes */
   .modes-grid{grid-template-columns:1fr;gap:14px}
   .mode-card{padding:22px 20px;border-radius:20px}
   .mode-card:active{transform:scale(.985)}
@@ -517,14 +674,10 @@ footer strong{color:var(--t2)}
   .mode-card h3{font-size:1.08rem}
   .mode-card p{font-size:.88rem;margin-bottom:14px}
   .mode-meta{font-size:.75rem;gap:8px}
-
-  /* Lessons */
   .lessons-grid{grid-template-columns:1fr;gap:10px}
   .lesson-pill{padding:14px;border-radius:14px}
   .lesson-num{width:34px;height:34px;font-size:.9rem}
   .lesson-info h4{font-size:.86rem}
-
-  /* Filters — horizontal scroll */
   .filters{padding:14px;border-radius:14px}
   .filter-row{
     overflow-x:auto;flex-wrap:nowrap;
@@ -537,127 +690,72 @@ footer strong{color:var(--t2)}
   .filter-label{flex-shrink:0;font-size:.72rem;min-width:0;letter-spacing:.6px}
   .chip{flex-shrink:0;min-height:36px;padding:8px 14px;font-size:.8rem}
 
-  /* ===== QUIZ ===== */
+  /* Quiz mobile */
   #screen-quiz .container{padding:12px 14px 110px}
-
   .quiz-header{
-    position:sticky;
-    top:calc(var(--header-h) + 6px);
-    z-index:50;
-    padding:10px 14px;
-    margin:0 -14px 12px;
-    border-radius:0;
-    border-left:none;border-right:none;
-    gap:8px;
+    position:sticky;top:calc(var(--header-h) + 6px);z-index:50;
+    padding:10px 14px;margin:0 -14px 12px;border-radius:0;
+    border-left:none;border-right:none;gap:8px;
   }
   .quiz-info{gap:8px;flex:1;min-width:0}
   .quiz-mode-badge{font-size:.66rem;padding:3px 8px;letter-spacing:0;white-space:nowrap}
   .quiz-counter{font-size:.82rem;white-space:nowrap}
   .quiz-timer{font-size:.82rem;white-space:nowrap}
-  .quiz-header > .btn-ghost{
-    padding:8px 12px;font-size:.8rem;min-height:38px;
-    flex-shrink:0;
-  }
+  .quiz-header > .btn-ghost{padding:8px 12px;font-size:.8rem;min-height:38px;flex-shrink:0}
   .progress-wrap{flex-basis:100%;margin-top:6px}
   .progress-bar{height:6px}
-
-  /* Question card */
   .q-card{padding:20px 16px;border-radius:18px;margin-bottom:16px}
   .q-meta{gap:6px;margin-bottom:14px}
   .q-tag{font-size:.68rem;padding:3px 9px}
   .q-text{font-size:1.02rem;line-height:1.6;margin-bottom:18px}
   .options{gap:10px}
-
-  /* Options */
-  .option{
-    padding:16px 16px;min-height:56px;
-    border-radius:14px;font-size:.94rem;line-height:1.5;
-    gap:12px;
-  }
+  .option{padding:16px 16px;min-height:56px;border-radius:14px;font-size:.94rem;line-height:1.5;gap:12px}
   .option-letter{width:32px;height:32px;font-size:.86rem;border-radius:9px}
   .option-text{padding-top:4px}
   .option:hover{transform:none}
   .option:active{transform:scale(.99);background:rgba(77,124,255,.12)}
-  .option.selected:active{transform:scale(.99)}
-
-  /* TF */
   .tf-stem{font-size:.98rem;line-height:1.6;margin-bottom:16px}
   .tf-list{gap:10px}
-  .tf-item{
-    flex-direction:column;gap:10px;
-    padding:14px 14px;border-radius:14px;
-  }
+  .tf-item{flex-direction:column;gap:10px;padding:14px 14px;border-radius:14px}
   .tf-content{width:100%}
   .tf-text{font-size:.9rem;margin-bottom:10px}
   .tf-toggle{width:100%;gap:8px}
-  .tf-btn{
-    flex:1;min-height:42px;padding:8px 10px;
-    font-size:.88rem;border-radius:10px;
-  }
+  .tf-btn{flex:1;min-height:42px;padding:8px 10px;font-size:.88rem;border-radius:10px}
   .tf-btn:active{transform:scale(.96)}
-
-  /* ===== ACTIONS — fixed bottom bar ===== */
   .q-actions{
-    position:fixed;
-    bottom:0;left:0;right:0;
-    z-index:40;
+    position:fixed;bottom:0;left:0;right:0;z-index:40;
     display:flex;align-items:center;gap:8px;
-    padding:10px 14px;
-    padding-bottom:calc(10px + var(--safe-bottom));
-    margin:0;
-    background:var(--bg1);
-    border-top:1px solid var(--gb);
+    padding:10px 14px;padding-bottom:calc(10px + var(--safe-bottom));
+    margin:0;background:var(--bg1);border-top:1px solid var(--gb);
     box-shadow:0 -8px 24px rgba(0,0,0,.18);
     backdrop-filter:blur(24px) saturate(180%);
     -webkit-backdrop-filter:blur(24px) saturate(180%);
-    flex-wrap:nowrap;
-    border-radius:0;
+    flex-wrap:nowrap;border-radius:0;
   }
   [data-theme="light"] .q-actions{box-shadow:0 -8px 24px rgba(15,23,42,.08)}
-
   .q-actions-left{flex-shrink:0}
   .q-actions-right{flex:1;display:flex;gap:8px;flex-wrap:nowrap}
-  .q-actions-right .btn{
-    flex:1;min-height:46px;padding:10px 12px;
-    font-size:.88rem;border-radius:12px;
-  }
+  .q-actions-right .btn{flex:1;min-height:46px;padding:10px 12px;font-size:.88rem;border-radius:12px}
   .q-actions .btn:active{transform:scale(.97)}
-
-  /* Flag button — icon only */
   .flag-btn{
     width:46px;height:46px;padding:0;
     display:flex;align-items:center;justify-content:center;
     font-size:0;border-radius:12px;
     background:var(--glass2);border:1px solid var(--gb);
   }
-  .flag-btn::before{
-    content:'☆';font-size:1.35rem;color:var(--t2);
-    display:inline-block;line-height:1;
-  }
+  .flag-btn::before{content:'☆';font-size:1.35rem;color:var(--t2);display:inline-block;line-height:1}
   .flag-btn.flagged::before{content:'★';color:var(--warn)}
   .flag-btn.flagged{background:rgba(245,158,11,.15);border-color:var(--warn)}
   .flag-btn:active{transform:scale(.93)}
-
-  /* ===== QNAV — horizontal scroll ===== */
   .qnav{
-    overflow-x:auto;flex-wrap:nowrap;
-    justify-content:flex-start;
-    padding:12px;gap:6px;
-    margin-top:16px;
-    border-radius:14px;
-    scrollbar-width:none;-ms-overflow-style:none;
-    -webkit-overflow-scrolling:touch;
-    scroll-padding:12px;
+    overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;
+    padding:12px;gap:6px;margin-top:16px;border-radius:14px;
+    scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;
   }
   .qnav::-webkit-scrollbar{display:none}
-  .qnav-dot{
-    flex-shrink:0;
-    width:38px;height:38px;
-    font-size:.82rem;border-radius:10px;
-  }
+  .qnav-dot{flex-shrink:0;width:38px;height:38px;font-size:.82rem;border-radius:10px}
   .qnav-dot:active{transform:scale(.9)}
 
-  /* ===== RESULT ===== */
   #screen-result .container{padding:20px 16px 60px}
   .result-hero{padding:8px 0 24px}
   .score-display{width:150px;height:150px;margin-bottom:18px}
@@ -666,19 +764,16 @@ footer strong{color:var(--t2)}
   .score-max{font-size:.78rem}
   .result-title{font-size:1.5rem;margin-bottom:8px}
   .result-msg{font-size:.92rem;margin-bottom:20px}
-
   .result-stats{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
   .result-stat{padding:14px 10px;border-radius:12px}
   .result-stat-label{font-size:.64rem;margin-bottom:4px;letter-spacing:.6px}
   .result-stat-value{font-size:1.2rem}
-
   .breakdown{padding:18px 16px;border-radius:18px;margin-bottom:16px}
   .breakdown h3{font-size:1rem;margin-bottom:14px}
   .bd-item{gap:10px;margin-bottom:12px}
   .bd-label{font-size:.78rem;min-width:58px}
   .bd-val{font-size:.75rem;min-width:58px}
   .bd-bar{height:7px}
-
   .review-list{gap:10px}
   .review-item{padding:14px;border-radius:12px}
   .rv-head{gap:6px;margin-bottom:6px}
@@ -686,16 +781,35 @@ footer strong{color:var(--t2)}
   .rv-q{font-size:.9rem;margin-bottom:8px}
   .rv-a{font-size:.8rem}
   .rv-exp{font-size:.78rem;padding:8px 10px;margin-top:6px}
-
   .result-actions{flex-direction:column;gap:8px;margin-top:24px}
   .result-actions .btn{width:100%;min-height:48px}
 
-  /* ===== MODAL ===== */
+  /* Binary practice mobile */
+  .bin-problem-card{padding:16px 12px;border-radius:18px}
+  .bin-cell{height:44px;min-width:36px;font-size:1.25rem;border-radius:9px}
+  .bin-cell.label{font-size:.95rem;padding-right:4px}
+  .bin-cell.carry{height:24px;font-size:.82rem}
+  .bin-grid{gap:5px}
+  .bin-actions{flex-direction:row;gap:8px}
+  .bin-actions .btn{flex:1;min-width:0;min-height:44px;padding:10px 12px;font-size:.88rem}
+  .bin-score-bar{gap:6px}
+  .bin-score-item{padding:6px 10px;font-size:.75rem}
+  .bin-score-item strong{font-size:.9rem}
+  .bin-difficulty{gap:6px}
+  .bin-difficulty .chip{font-size:.78rem;padding:7px 12px;min-height:34px}
+  .bin-rules{padding:14px 16px}
+  .bin-rules summary{font-size:.92rem}
+  .bin-rules p{font-size:.82rem}
+  .bin-feedback{padding:16px;border-radius:18px}
+  .bin-feedback h3{font-size:1rem}
+  .bin-feedback .fb-msg{font-size:.85rem}
+  .bin-step{padding:9px 12px;font-size:.8rem}
+  .bin-step .step-header{font-size:.82rem;flex-wrap:wrap}
+  .bin-step .step-detail{font-size:.78rem}
+
   .modal-backdrop{padding:16px;align-items:flex-end}
   .modal{
-    padding:24px 20px;
-    border-radius:22px 22px 0 0;
-    max-width:100%;
+    padding:24px 20px;border-radius:22px 22px 0 0;max-width:100%;
     padding-bottom:calc(24px + var(--safe-bottom));
     animation:slideUp .3s cubic-bezier(.4,0,.2,1);
   }
@@ -705,22 +819,15 @@ footer strong{color:var(--t2)}
   .modal-actions{flex-direction:column-reverse;gap:8px}
   .modal-actions .btn{width:100%;min-height:46px;padding:12px 16px}
 
-  /* ===== TOAST ===== */
   .toast{
-    left:16px;right:16px;
-    transform:translateY(120px);
-    padding:12px 16px;
-    font-size:.86rem;
-    justify-content:center;
+    left:16px;right:16px;transform:translateY(120px);
+    padding:12px 16px;font-size:.86rem;justify-content:center;
     bottom:calc(80px + var(--safe-bottom));
   }
   .toast.show{transform:translateY(0)}
-
-  /* Footer */
   footer{padding:24px 16px;font-size:.76rem;margin-top:32px}
 }
 
-/* ===== Small phones ≤ 380px ===== */
 @media (max-width: 380px){
   .stats-grid{grid-template-columns:1fr}
   .result-stats{grid-template-columns:1fr}
@@ -730,15 +837,15 @@ footer strong{color:var(--t2)}
   .option{padding:14px;font-size:.9rem}
   .q-text{font-size:.98rem}
   .qnav-dot{width:34px;height:34px;font-size:.78rem}
+  .bin-grid{gap:4px}
+  .bin-cell{height:40px;min-width:32px;font-size:1.1rem}
+  .bin-cell.carry{height:22px;font-size:.75rem}
 }
 
-/* ===== Tablet landscape/desktop refinements ===== */
 @media (min-width: 769px) and (max-width: 1024px){
   .container{padding:40px 24px 70px}
-  .modes-grid{grid-template-columns:repeat(2,1fr)}
 }
 
-/* Disable hover transforms on touch devices */
 @media (hover: none){
   .mode-card:hover{transform:none}
   .stat-card:hover{transform:none}
@@ -747,6 +854,7 @@ footer strong{color:var(--t2)}
   .lesson-pill:hover{transform:none}
   .option:hover{transform:none;background:var(--glass2);border-color:var(--gb)}
   .option.selected:hover{background:rgba(77,124,255,.15);border-color:var(--acc)}
+  .bin-cell.answer:hover:not(:disabled){background:rgba(77,124,255,.12);border-color:rgba(77,124,255,.5)}
 }
 </style>
 </head>
@@ -800,7 +908,7 @@ footer strong{color:var(--t2)}
     </div>
 
     <div class="section-title" id="modes-section">
-      <h2>Ba chế độ luyện tập</h2>
+      <h2>Bốn chế độ luyện tập</h2>
       <p>Chọn hình thức phù hợp với mục tiêu ôn tập của bạn</p>
     </div>
     <div class="modes-grid">
@@ -821,6 +929,12 @@ footer strong{color:var(--t2)}
         <h3>Luyện tập tổng hợp</h3>
         <p>Kết hợp 12 câu trắc nghiệm và 4 câu đúng/sai. Điểm cuối là trung bình cộng hai phần.</p>
         <div class="mode-meta"><span>12 MC + 4 Đ/S</span><span>16 câu lớn</span><span>Trung bình 2 phần</span></div>
+      </div>
+      <div class="mode-card" onclick="App.openBinary()" tabindex="0" role="button">
+        <div class="mode-icon">🧮</div>
+        <h3>Luyện cộng nhị phân</h3>
+        <p>Thực hành cộng hai số trong hệ nhị phân với hướng dẫn từng bước và sửa lỗi chi tiết khi sai.</p>
+        <div class="mode-meta"><span>Tự do luyện</span><span>Sửa lỗi từng bước</span><span>3 độ khó</span></div>
       </div>
     </div>
 
@@ -895,6 +1009,54 @@ footer strong{color:var(--t2)}
   </div>
 </main>
 
+<!-- ============ BINARY ============ -->
+<main class="screen" id="screen-binary">
+  <div class="container" style="max-width:820px">
+    <div class="section-title" style="margin-top:0">
+      <h2>Luyện cộng nhị phân</h2>
+      <p>Thực hành cộng hai số trong hệ nhị phân, có hướng dẫn và sửa lỗi từng bước</p>
+    </div>
+
+    <div class="bin-score-bar">
+      <div class="bin-score-item">Đúng <strong id="bin-correct">0</strong></div>
+      <div class="bin-score-item">Tổng <strong id="bin-total">0</strong></div>
+      <div class="bin-score-item">Chuỗi đúng <strong id="bin-streak">0</strong></div>
+    </div>
+
+    <details class="bin-rules" open>
+      <summary>📖 Hướng dẫn cộng hai số nhị phân</summary>
+      <div class="bin-rules-content">
+        <p><strong>Quy tắc cộng cơ bản</strong> — chỉ dùng 2 chữ số 0 và 1:</p>
+        <div class="bin-rules-grid">
+          <div class="bin-rule-item"><span class="op">0 + 0</span> = <span class="res">0</span></div>
+          <div class="bin-rule-item"><span class="op">0 + 1</span> = <span class="res">1</span></div>
+          <div class="bin-rule-item"><span class="op">1 + 0</span> = <span class="res">1</span></div>
+          <div class="bin-rule-item"><span class="op">1 + 1</span> = <span class="res">10</span></div>
+        </div>
+        <p>Khi cộng có nhớ (<strong>1 + 1 = 10₂</strong>), ta viết <strong>0</strong> và nhớ <strong>1</strong> sang cột bên trái. Nếu cộng 3 bit (1 + 1 + 1 = 11₂), ta viết <strong>1</strong> và nhớ <strong>1</strong>.</p>
+        <p><strong>Quy trình:</strong> Cộng từ <strong>phải sang trái</strong>. Mỗi cột tính tổng A + B + nhớ, ghi bit kết quả (tổng mod 2) và nhớ sang cột bên trái (tổng chia 2).</p>
+        <p><strong>Ví dụ:</strong> 10₁₀ + 7₁₀ = 17₁₀, tức 01010₂ + 00111₂ = 10001₂</p>
+        <div class="bin-example">   1 1 1        ← nhớ
+   0 1 0 1 0
+ + 0 0 1 1 1
+ ─────────────
+   1 0 0 0 1    ← kết quả</div>
+        <p style="font-size:.82rem"><em>Giải thích:</em> Cột 1 (phải): 0+1 = 1, viết 1. Cột 2: 1+1 = 10₂, viết 0 nhớ 1. Cột 3: 0+1+1 = 10₂, viết 0 nhớ 1. Cột 4: 1+0+1 = 10₂, viết 0 nhớ 1. Cột 5: 0+0+1 = 1, viết 1.</p>
+      </div>
+    </details>
+
+    <div class="bin-difficulty">
+      <button class="chip active" data-bin-diff="easy" onclick="App.setBinaryDifficulty('easy')">Dễ (2–3 bit)</button>
+      <button class="chip" data-bin-diff="medium" onclick="App.setBinaryDifficulty('medium')">Trung bình (3–4 bit)</button>
+      <button class="chip" data-bin-diff="hard" onclick="App.setBinaryDifficulty('hard')">Khó (4–5 bit)</button>
+    </div>
+
+    <div id="bin-problem-container"></div>
+    <div class="bin-actions" id="bin-actions"></div>
+    <div id="bin-feedback-container"></div>
+  </div>
+</main>
+
 <!-- ============ RESULT ============ -->
 <main class="screen" id="screen-result">
   <div class="container" style="max-width:820px">
@@ -908,7 +1070,6 @@ footer strong{color:var(--t2)}
 </footer>
 </div>
 
-<!-- MODAL -->
 <div class="modal-backdrop" id="modal" onclick="if(event.target===this)App.closeModal()">
   <div class="modal">
     <h3 id="modal-title">Xác nhận</h3>
@@ -922,13 +1083,8 @@ footer strong{color:var(--t2)}
 <script>
 /* ============================================================
    NGÂN HÀNG CÂU HỎI
-   Format MC: [id, lesson, difficulty, question, [options], correctIndex, explanation]
-   Format TF: [id, lesson, difficulty, stem, [[text, bool, explanation] x4]]
-   Difficulty: NB = Nhận biết, TH = Thông hiểu, VD = Vận dụng, VC = Vận dụng cao
    ============================================================ */
-
 const MC = [
-// ---------- BÀI 1: HỆ ĐIỀU HÀNH (17 câu) ----------
 ['mc1-01',1,'NB','Hệ điều hành của các loại máy tính nói chung có mấy nhóm chức năng chính?',
  ['3 nhóm','4 nhóm','5 nhóm','6 nhóm'],2,
  'Theo SGK, hệ điều hành có 5 nhóm chức năng: quản lý thiết bị, quản lý lưu trữ dữ liệu, tổ chức thực hiện chương trình, cung cấp môi trường giao tiếp, cung cấp tiện ích.'],
@@ -967,7 +1123,7 @@ const MC = [
  'Lò vi sóng dùng chương trình ghi trong ROM, bật lên là chạy, không cần hệ điều hành.'],
 ['mc1-13',1,'TH','Windows 95 đánh dấu bước phát triển quan trọng nào của hệ điều hành Windows?',
  ['Lần đầu có giao diện đồ họa','Tích hợp nhiều tính năng cơ bản của hệ điều hành trực tiếp vào Windows','Lần đầu hỗ trợ đa nhiệm','Lần đầu có trình duyệt web'],1,
- 'Từ Windows 95, nhiều tính năng cơ bản của hệ điều hành mới được tích hợp trực tiếp vào Windows (trước đó Windows chỉ là vỏ bọc đồ họa gọi dịch vụ DOS).'],
+ 'Từ Windows 95, nhiều tính năng cơ bản của hệ điều hành mới được tích hợp trực tiếp vào Windows.'],
 ['mc1-14',1,'TH','Đặc điểm nào sau đây KHÔNG phải là đặc điểm của hệ điều hành cho thiết bị di động?',
  ['Ưu tiên kết nối mạng không dây','Giao diện thân thiện nhờ cảm biến','Giao diện dòng lệnh là chính','Nhiều tiện ích hỗ trợ cá nhân'],2,
  'Hệ điều hành di động có giao diện đồ họa thân thiện, thao tác vuốt/chạm/lắc, không dùng giao diện dòng lệnh là chính.'],
@@ -981,7 +1137,6 @@ const MC = [
  ['Miễn phí, mã nguồn mở','Ổn định, an toàn','Chạy được trên nhiều loại thiết bị','Giao diện độc quyền, không thể thay đổi'],3,
  'Linux cho phép tuỳ biến giao diện, không có giao diện độc quyền cố định.'],
 
-// ---------- BÀI 2: THỰC HÀNH SỬ DỤNG HỆ ĐIỀU HÀNH (15 câu) ----------
 ['mc2-01',2,'NB','Thành phần nào của giao diện Windows cho phép truy cập nhanh các phần mềm ứng dụng?',
  ['Thanh công việc (Taskbar) và nút Start','Thanh trạng thái','Cửa sổ ứng dụng','Con trỏ chuột'],0,
  'Thanh công việc và nút Start giúp truy cập nhanh các phần mềm ứng dụng.'],
@@ -1028,19 +1183,18 @@ const MC = [
  ['Ctrl + nháy chuột','Shift + nháy chuột','Alt + nháy chuột','Tab + nháy chuột'],1,
  'Giữ phím Shift và nháy chuột để chọn các tệp liền nhau; giữ Ctrl để chọn các tệp tách rời.'],
 
-// ---------- BÀI 3: PHẦN MỀM NGUỒN MỞ VÀ PHẦN MỀM CHẠY TRÊN INTERNET (16 câu) ----------
 ['mc3-01',3,'NB','Phần mềm thương mại là gì?',
  ['Phần mềm miễn phí','Phần mềm để bán, thường là nguồn đóng','Phần mềm mã nguồn mở','Phần mềm chạy trên Internet'],1,
- 'Phần mềm thương mại là phần mềm để bán; hầu hết là nguồn đóng để bảo vệ ý tưởng và chống sửa đổi.'],
+ 'Phần mềm thương mại là phần mềm để bán; hầu hết là nguồn đóng.'],
 ['mc3-02',3,'NB','Phần mềm nguồn mở là gì?',
  ['Phần mềm không cần cài đặt','Phần mềm cung cấp cả mã nguồn để sửa đổi, phát triển','Phần mềm chỉ chạy trên Linux','Phần mềm không có bản quyền'],1,
  'Phần mềm nguồn mở cung cấp cả mã nguồn để người dùng tự sửa đổi, cải tiến, phát triển, phân phối lại theo giấy phép.'],
 ['mc3-03',3,'NB','Giấy phép GNU GPL là gì?',
  ['Giấy phép của Microsoft','Giấy phép công cộng GNU, áp dụng rộng rãi cho phần mềm nguồn mở','Giấy phép thương mại','Giấy phép chứng chỉ tin học'],1,
- 'GNU GPL (GNU General Public License) là giấy phép điển hình cho phần mềm nguồn mở.'],
+ 'GNU GPL là giấy phép điển hình cho phần mềm nguồn mở.'],
 ['mc3-04',3,'NB','Phần mềm nào sau đây là phần mềm nguồn mở?',
  ['Microsoft Word','Photoshop','GIMP','Windows'],2,
- 'GIMP là phần mềm xử lý ảnh nguồn mở; Word, Photoshop, Windows là phần mềm thương mại.'],
+ 'GIMP là phần mềm xử lý ảnh nguồn mở.'],
 ['mc3-05',3,'NB','Phần mềm nào sau đây là phần mềm thương mại?',
  ['GIMP','Ubuntu','Photoshop','OpenOffice'],2,
  'Photoshop của Adobe là phần mềm thương mại.'],
@@ -1061,92 +1215,90 @@ const MC = [
  'Phần mềm chạy trên Internet cho phép sử dụng qua Internet mà không cần cài đặt vào máy.'],
 ['mc3-11',3,'NB','Ví dụ nào sau đây là phần mềm trực tuyến?',
  ['Microsoft Word','Google Docs','Notepad','Windows Media Player'],1,
- 'Google Docs là phần mềm soạn thảo trực tuyến; có thể dùng ở bất cứ đâu có Internet.'],
+ 'Google Docs là phần mềm soạn thảo trực tuyến.'],
 ['mc3-12',3,'TH','Nhược điểm của phần mềm thương mại là gì?',
  ['Không có tính năng nâng cao','Chi phí mua và phụ thuộc nhà cung cấp','Không được cập nhật','Không có hỗ trợ kỹ thuật'],1,
- 'Phần mềm thương mại mất chi phí mua và người dùng bị phụ thuộc vào nhà cung cấp về giải pháp, hỗ trợ kỹ thuật.'],
+ 'Phần mềm thương mại mất chi phí mua và người dùng bị phụ thuộc vào nhà cung cấp.'],
 ['mc3-13',3,'TH','Phần mềm Acrobat Reader thuộc loại nào?',
  ['Phần mềm thương mại','Phần mềm tự do (miễn phí, không có mã nguồn)','Phần mềm nguồn mở','Phần mềm trực tuyến'],1,
- 'Acrobat Reader là phần mềm tự do ở dạng mã máy, chỉ đọc, ghi chú, in; muốn tính năng cao hơn phải mua Acrobat Pro DC.'],
+ 'Acrobat Reader là phần mềm tự do ở dạng mã máy.'],
 ['mc3-14',3,'TH','Điều kiện quan trọng của giấy phép GNU GPL là gì?',
  ['Phần mềm sửa đổi từ phần mềm GPL cũng phải mở theo GPL','Phần mềm GPL không được bán','Phần mềm GPL phải có bảo hành','Phần mềm GPL không được sửa đổi'],0,
  'GPL yêu cầu phần mềm sửa đổi từ phần mềm GPL cũng phải mở theo giấy phép GPL.'],
 ['mc3-15',3,'VD','Phần mềm nguồn mở có thể thay thế hoàn toàn phần mềm thương mại không?',
  ['Có, vì nguồn mở luôn tốt hơn','Không, vì phần mềm đặt hàng đáp ứng nhu cầu riêng mà nguồn mở không có','Có, vì phần mềm thương mại sắp biến mất','Không, vì nguồn mở không có tính năng nào'],1,
- 'Phần mềm nguồn mở đáp ứng nhu cầu chung; nhu cầu riêng cần phần mềm đặt hàng. Hai loại bổ sung cho nhau.'],
+ 'Phần mềm nguồn mở đáp ứng nhu cầu chung; nhu cầu riêng cần phần mềm đặt hàng.'],
 ['mc3-16',3,'NB','Bộ phần mềm văn phòng mã nguồn mở nào sau đây có thể thay thế Microsoft Office?',
  ['OpenOffice (Writer, Calc, Impress)','Photoshop','GIMP','MySQL'],0,
- 'OpenOffice (Writer, Calc, Impress) là bộ phần mềm văn phòng nguồn mở có thể thay thế Word, Excel, PowerPoint.'],
+ 'OpenOffice là bộ phần mềm văn phòng nguồn mở.'],
 
-// ---------- BÀI 4: BÊN TRONG MÁY TÍNH (17 câu) ----------
 ['mc4-01',4,'NB','CPU là viết tắt của gì?',
  ['Central Processing Unit (Bộ xử lý trung tâm)','Computer Personal Unit','Central Program Utility','Control Processing Unit'],0,
  'CPU = Central Processing Unit — Bộ xử lý trung tâm.'],
 ['mc4-02',4,'NB','CPU được cấu tạo từ mấy bộ phận chính?',
  ['1','2','3','4'],1,
- 'CPU gồm 2 bộ phận chính: Bộ số học và logic (ALU) và Bộ điều khiển (Control Unit).'],
+ 'CPU gồm 2 bộ phận chính: ALU và Control Unit.'],
 ['mc4-03',4,'NB','Bộ số học và logic (ALU) thực hiện chức năng gì?',
  ['Điều khiển các thiết bị','Thực hiện các phép tính số học và logic','Lưu trữ dữ liệu lâu dài','Kết nối mạng'],1,
- 'ALU thực hiện tất cả các phép tính số học và logic trong máy tính.'],
+ 'ALU thực hiện tất cả các phép tính số học và logic.'],
 ['mc4-04',4,'NB','Bộ điều khiển (Control Unit) có chức năng gì?',
  ['Thực hiện phép tính','Phối hợp đồng bộ các thiết bị, đảm bảo máy tính thực hiện đúng chương trình','Lưu trữ dữ liệu','Hiển thị hình ảnh'],1,
- 'Bộ điều khiển phối hợp đồng bộ các thiết bị của máy tính, đảm bảo máy tính thực hiện đúng chương trình.'],
+ 'Bộ điều khiển phối hợp đồng bộ các thiết bị của máy tính.'],
 ['mc4-05',4,'NB','Tần số đồng hồ xung của CPU thường được đo bằng đơn vị gì?',
  ['MHz','GHz','MB','Mbps'],1,
- 'Tần số đồng hồ xung thường tính bằng GHz (1 tỉ xung/giây).'],
+ 'Tần số đồng hồ xung thường tính bằng GHz.'],
 ['mc4-06',4,'NB','RAM là bộ nhớ có đặc điểm gì?',
  ['Chỉ đọc, giữ dữ liệu lâu dài','Ghi được, mất dữ liệu khi tắt máy','Ghi được, giữ dữ liệu vĩnh viễn','Không thể ghi'],1,
- 'RAM là bộ nhớ ghi được, dùng ghi dữ liệu tạm thời khi chạy chương trình; khi tắt máy dữ liệu trong RAM bị xoá.'],
+ 'RAM là bộ nhớ ghi được, dữ liệu bị xoá khi tắt máy.'],
 ['mc4-07',4,'NB','ROM là bộ nhớ có đặc điểm gì?',
  ['Ghi được, mất dữ liệu khi tắt máy','Chỉ đọc, giữ dữ liệu lâu dài, không cần nguồn nuôi','Có dung lượng lớn hơn RAM','Là bộ nhớ ngoài'],1,
- 'ROM là bộ nhớ chỉ đọc, giữ dữ liệu lâu dài, không cần nguồn nuôi.'],
+ 'ROM là bộ nhớ chỉ đọc, giữ dữ liệu lâu dài.'],
 ['mc4-08',4,'NB','Bộ nhớ ngoài bao gồm những loại nào?',
  ['RAM và ROM','Đĩa từ, đĩa thể rắn (SSD), đĩa quang','CPU và ALU','Màn hình và máy in'],1,
- 'Bộ nhớ ngoài thường là đĩa từ (đĩa cứng, đĩa mềm), đĩa thể rắn (SSD), đĩa quang.'],
+ 'Bộ nhớ ngoài thường là đĩa từ, SSD, đĩa quang.'],
 ['mc4-09',4,'NB','Phép toán logic AND cho kết quả 1 khi nào?',
  ['Khi cả hai đầu vào đều bằng 1','Khi ít nhất một đầu vào bằng 1','Khi hai đầu vào khác nhau','Khi cả hai đầu vào đều bằng 0'],0,
- 'AND cho kết quả 1 chỉ khi cả hai đầu vào x VÀ y đều bằng 1.'],
+ 'AND cho kết quả 1 chỉ khi cả hai đầu vào đều bằng 1.'],
 ['mc4-10',4,'NB','Phép toán logic OR cho kết quả 0 khi nào?',
  ['Khi cả hai đầu vào đều bằng 1','Khi một đầu vào bằng 1','Khi cả hai đầu vào đều bằng 0','Khi hai đầu vào khác nhau'],2,
- 'OR cho kết quả 1 khi ít nhất một đầu vào bằng 1; cho kết quả 0 khi cả hai đầu vào đều bằng 0.'],
+ 'OR cho kết quả 0 khi cả hai đầu vào đều bằng 0.'],
 ['mc4-11',4,'NB','Phép toán logic NOT có kết quả là gì?',
  ['Giữ nguyên giá trị','Đảo ngược giá trị (0 thành 1, 1 thành 0)','Luôn bằng 0','Luôn bằng 1'],1,
- 'NOT là phép phủ định logic: phủ định của 0 là 1, phủ định của 1 là 0.'],
+ 'NOT là phép phủ định logic.'],
 ['mc4-12',4,'NB','Phép toán logic XOR cho kết quả 1 khi nào?',
  ['Khi cả hai đầu vào đều bằng 1','Khi cả hai đầu vào đều bằng 0','Khi hai đầu vào khác nhau','Khi một đầu vào bằng 0'],2,
- 'XOR (OR loại trừ) cho kết quả 1 khi và chỉ khi hai đầu vào có giá trị khác nhau.'],
+ 'XOR cho kết quả 1 khi hai đầu vào có giá trị khác nhau.'],
 ['mc4-13',4,'TH','Số 19 trong hệ nhị phân là gì?',
  ['10011','11001','10101','11100'],0,
- '19 = 16 + 2 + 1 = 1×2⁴ + 0×2³ + 0×2² + 1×2¹ + 1×2⁰ = 10011.'],
+ '19 = 16 + 2 + 1 = 10011₂.'],
 ['mc4-14',4,'TH','Kết quả phép cộng nhị phân 110 + 111 là gì?',
  ['1101','1011','1110','1001'],0,
- '6 + 7 = 13; 13 trong hệ nhị phân là 1101.'],
+ '6 + 7 = 13 = 1101₂.'],
 ['mc4-15',4,'TH','Mạch logic là gì?',
  ['Mạch điện có đầu vào và đầu ra thể hiện các giá trị logic','Mạch điện chỉ có đầu vào','Mạch điện chỉ có đầu ra','Mạch điện tử không có đầu vào/ra'],0,
- 'Mạch logic (mạch số) là mạch điện/điện tử có đầu vào và đầu ra thể hiện các giá trị logic.'],
+ 'Mạch logic là mạch điện/điện tử có đầu vào và đầu ra thể hiện giá trị logic.'],
 ['mc4-16',4,'TH','Bộ nhớ đệm (cache) có chức năng gì?',
  ['Lưu trữ dữ liệu vĩnh viễn','Giảm thời gian đọc dữ liệu từ bộ nhớ trong','Tăng dung lượng RAM','Điều khiển các thiết bị ngoại vi'],1,
- 'Cache là bộ nhớ nhỏ chứa dữ liệu nạp trước từ bộ nhớ trong, giúp giảm thời gian đọc dữ liệu.'],
+ 'Cache giúp giảm thời gian đọc dữ liệu từ bộ nhớ trong.'],
 ['mc4-17',4,'VD','Kết quả phép cộng nhị phân 101 + 11 là gì?',
  ['1000','1100','1110','1010'],0,
- '5 + 3 = 8; 8 trong hệ nhị phân là 1000.'],
+ '5 + 3 = 8 = 1000₂.'],
 
-// ---------- BÀI 5: KẾT NỐI MÁY TÍNH VỚI THIẾT BỊ SỐ (16 câu) ----------
 ['mc5-01',5,'NB','Thiết bị vào là gì?',
  ['Thiết bị đưa dữ liệu vào máy tính','Thiết bị đưa thông tin từ máy tính ra ngoài','Thiết bị lưu trữ dữ liệu','Thiết bị xử lý dữ liệu'],0,
- 'Thiết bị vào cho phép nhập dữ liệu vào máy tính như bàn phím, chuột, máy quét, camera.'],
+ 'Thiết bị vào cho phép nhập dữ liệu vào máy tính.'],
 ['mc5-02',5,'NB','Thiết bị ra là gì?',
  ['Thiết bị đưa dữ liệu vào máy tính','Thiết bị đưa thông tin từ máy tính ra ngoài','Thiết bị xử lý dữ liệu','Thiết bị lưu trữ'],1,
- 'Thiết bị ra chuyển thông tin từ máy tính ra ngoài như màn hình, máy in, máy chiếu.'],
+ 'Thiết bị ra chuyển thông tin từ máy tính ra ngoài.'],
 ['mc5-03',5,'NB','Độ phân giải của chuột được đo bằng đơn vị gì?',
  ['dpi (dots per inch)','ppi (pixels per inch)','Hz (hertz)','Mbps'],0,
- 'Độ phân giải chuột đo bằng dpi — số điểm riêng rẽ mà chuột xác định được khi dịch chuyển một inch.'],
+ 'Độ phân giải chuột đo bằng dpi.'],
 ['mc5-04',5,'NB','Kích thước màn hình máy tính được đo bằng gì?',
  ['Chiều ngang, tính bằng cm','Độ dài đường chéo, tính bằng inch','Diện tích, tính bằng cm²','Số điểm ảnh theo chiều ngang'],1,
  'Kích thước màn hình được đo bằng độ dài đường chéo, tính theo inch.'],
 ['mc5-05',5,'NB','Độ phân giải màn hình Full HD là bao nhiêu?',
  ['1280 × 720','1920 × 1080','2560 × 1440','3840 × 2160'],1,
- 'Full HD là 1920 × 1080 pixel; VGA là 640 × 480.'],
+ 'Full HD là 1920 × 1080 pixel.'],
 ['mc5-06',5,'NB','Tần số quét màn hình được đo bằng đơn vị gì?',
  ['Hz (hertz)','dpi','ppi','Mbps'],0,
  'Tần số quét là số lần hiển thị lại hình ảnh trong một giây, đo bằng Hz.'],
@@ -1155,276 +1307,266 @@ const MC = [
  'Máy in laser được dùng phổ biến để in tài liệu văn phòng.'],
 ['mc5-08',5,'TH','Máy in kim thường được dùng để in gì?',
  ['Ảnh màu chất lượng cao','Hoá đơn có nhiều liên','Phông bạt khổ lớn','Tài liệu trên giấy cảm ứng nhiệt'],1,
- 'Máy in kim dùng để in hoá đơn có nhiều liên — chưa có phương pháp nào tốt hơn.'],
+ 'Máy in kim dùng để in hoá đơn có nhiều liên.'],
 ['mc5-09',5,'TH','Máy in phun phù hợp để in gì?',
  ['Văn bản văn phòng','Ảnh màu, phông bạt quảng cáo','Hoá đơn nhiều liên','Tài liệu trên giấy cảm ứng nhiệt'],1,
- 'Máy in phun phun hạt mực màu nước siêu nhỏ, thích hợp in ảnh màu, phông bạt với chi phí thấp.'],
+ 'Máy in phun thích hợp in ảnh màu, phông bạt.'],
 ['mc5-10',5,'NB','Cổng VGA truyền tín hiệu gì?',
  ['Tín hiệu số, cả âm thanh và hình ảnh','Tín hiệu tương tự (analog) để truyền hình ảnh, không truyền âm thanh','Tín hiệu âm thanh','Tín hiệu mạng'],1,
  'Cổng VGA dùng tín hiệu tương tự, không truyền âm thanh.'],
 ['mc5-11',5,'NB','Cổng HDMI truyền tín hiệu gì?',
  ['Tín hiệu tương tự','Tín hiệu số, cả âm thanh và hình ảnh','Chỉ âm thanh','Chỉ hình ảnh'],1,
- 'HDMI truyền tín hiệu số, truyền đồng thời cả âm thanh và hình ảnh với băng thông lớn.'],
+ 'HDMI truyền tín hiệu số, cả âm thanh và hình ảnh.'],
 ['mc5-12',5,'NB','USB là viết tắt của gì?',
  ['Universal Serial Bus','Universal System Bus','Unified Serial Buffer','Universal Storage Bus'],0,
- 'USB = Universal Serial Bus — cổng kết nối phổ biến, đa năng.'],
+ 'USB = Universal Serial Bus.'],
 ['mc5-13',5,'NB','Bluetooth hoạt động trong phạm vi bao xa?',
  ['Dưới 1m','Dưới 10m','Dưới 100m','Dưới 1km'],1,
- 'Bluetooth là phương thức kết nối không dây trong khoảng cách gần (dưới 10m).'],
+ 'Bluetooth là kết nối không dây trong khoảng cách gần (dưới 10m).'],
 ['mc5-14',5,'NB','Trước khi kết nối Bluetooth, ta cần làm gì?',
  ['Cài driver','Ghép đôi (pairing)','Khởi động lại máy','Tắt Wi-Fi'],1,
- 'Trước khi kết nối, máy tính/điện thoại cần ghép đôi (pairing) với thiết bị Bluetooth để trao đổi tham số kết nối.'],
+ 'Cần ghép đôi (pairing) trước khi kết nối Bluetooth.'],
 ['mc5-15',5,'NB','Máy quét ảnh là thiết bị vào hay ra?',
  ['Thiết bị vào','Thiết bị ra','Vừa vào vừa ra','Không phải thiết bị vào ra'],0,
- 'Máy quét ảnh là thiết bị vào, cho phép nhập dữ liệu vào máy tính.'],
+ 'Máy quét ảnh là thiết bị vào.'],
 ['mc5-16',5,'NB','Máy chiếu là thiết bị vào hay ra?',
  ['Thiết bị vào','Thiết bị ra','Vừa vào vừa ra','Không phải thiết bị vào ra'],1,
- 'Máy chiếu là thiết bị ra, chuyển thông tin từ máy tính ra ngoài.'],
+ 'Máy chiếu là thiết bị ra.'],
 
-// ---------- BÀI 6: LƯU TRỮ VÀ CHIA SẺ TỆP TIN TRÊN INTERNET (15 câu) ----------
 ['mc6-01',6,'NB','Dịch vụ lưu trữ trực tuyến còn được gọi là gì?',
  ['Lưu trữ đám mây','Lưu trữ cục bộ','Lưu trữ ngoại tuyến','Lưu trữ quang học'],0,
- 'Dịch vụ lưu trữ và chia sẻ tệp tin trên Internet còn được gọi là dịch vụ "Lưu trữ đám mây".'],
+ 'Dịch vụ lưu trữ và chia sẻ tệp tin trên Internet còn được gọi là "Lưu trữ đám mây".'],
 ['mc6-02',6,'NB','Đâu là dịch vụ lưu trữ trực tuyến?',
  ['Photoshop','Google Drive','Microsoft Word','Windows Media Player'],1,
- 'Google Drive là dịch vụ lưu trữ và chia sẻ tệp tin trực tuyến của Google.'],
+ 'Google Drive là dịch vụ lưu trữ và chia sẻ tệp tin trực tuyến.'],
 ['mc6-03',6,'NB','Đâu KHÔNG phải là dịch vụ lưu trữ trực tuyến?',
  ['Google Drive','OneDrive','Dropbox','Photoshop'],3,
- 'Photoshop là phần mềm chỉnh sửa ảnh, không phải dịch vụ lưu trữ trực tuyến.'],
+ 'Photoshop là phần mềm chỉnh sửa ảnh.'],
 ['mc6-04',6,'NB','Google Drive cung cấp không gian lưu trữ trực tuyến dưới dạng gì?',
  ['Thư mục cứng','Ổ đĩa trực tuyến','USB ảo','Đĩa quang'],1,
- 'Khi đăng ký, người dùng được cấp một không gian nhớ trực tuyến gọi là "ổ đĩa trực tuyến".'],
+ 'Google Drive cung cấp "ổ đĩa trực tuyến".'],
 ['mc6-05',6,'NB','Để tải tệp từ máy tính lên Google Drive, ta dùng lệnh gì?',
  ['Download','Upload (Tải tệp lên)','Share','Delete'],1,
- 'Tải tệp lên (Upload) cho phép tải các tệp/thư mục từ máy tính lên ổ đĩa trực tuyến.'],
+ 'Tải tệp lên (Upload) cho phép tải tệp lên ổ đĩa trực tuyến.'],
 ['mc6-06',6,'NB','Có mấy chế độ chia sẻ tệp trên ổ đĩa trực tuyến?',
  ['1','2','3','4'],2,
  'Có 3 chế độ: chỉ xem, được nhận xét, được chỉnh sửa.'],
 ['mc6-07',6,'NB','Quyền cao nhất khi chia sẻ tệp trên ổ đĩa trực tuyến là gì?',
  ['Chỉ xem','Được nhận xét','Chỉnh sửa','Chỉ đọc'],2,
- 'Quyền chỉnh sửa là quyền cao nhất: cho phép xem, nhận xét, chỉnh sửa, xoá, tạo mới, đổi tên...'],
+ 'Quyền chỉnh sửa là quyền cao nhất.'],
 ['mc6-08',6,'NB','Để chia sẻ tệp trên Google Drive, ta làm gì?',
  ['Nháy đúp chuột vào tệp','Nháy nút phải chuột vào tệp, chọn Chia sẻ','Nhấn phím Delete','Kéo thả tệp'],1,
- 'Nháy nút phải chuột vào tệp cần chia sẻ, chọn Chia sẻ để mở hộp thoại chia sẻ.'],
+ 'Nháy nút phải chuột vào tệp cần chia sẻ, chọn Chia sẻ.'],
 ['mc6-09',6,'TH','Ưu điểm của lưu trữ trực tuyến là gì?',
  ['Truy cập mọi lúc, mọi nơi có Internet','Tốc độ nhanh hơn ổ cứng','Không cần Internet','Dung lượng không giới hạn'],0,
- 'Lưu trữ trực tuyến cho phép truy cập ở bất cứ đâu, bất cứ máy tính nào miễn có kết nối Internet.'],
+ 'Lưu trữ trực tuyến cho phép truy cập ở bất cứ đâu có Internet.'],
 ['mc6-10',6,'TH','Nhược điểm của lưu trữ trực tuyến là gì?',
  ['Không thể chia sẻ','Phụ thuộc vào kết nối Internet','Không thể tải xuống','Không thể tạo thư mục'],1,
- 'Lưu trữ trực tuyến phụ thuộc vào kết nối Internet; khi mất mạng không thể truy cập.'],
+ 'Lưu trữ trực tuyến phụ thuộc vào kết nối Internet.'],
 ['mc6-11',6,'NB','Ổ đĩa trực tuyến là gì?',
  ['Ổ cứng gắn ngoài','Không gian lưu trữ trên Internet','USB','Đĩa quang'],1,
- 'Ổ đĩa trực tuyến là không gian nhớ trực tuyến để lưu trữ tệp và thư mục của người dùng.'],
+ 'Ổ đĩa trực tuyến là không gian nhớ trực tuyến.'],
 ['mc6-12',6,'NB','Để tải tệp từ ổ đĩa trực tuyến về máy, ta dùng lệnh gì?',
  ['Upload','Download (Tải xuống)','Share','Rename'],1,
- 'Tải xuống (Download) cho phép tải tệp từ ổ đĩa trực tuyến về máy tính.'],
+ 'Tải xuống (Download) cho phép tải tệp về máy.'],
 ['mc6-13',6,'TH','Ai quyết định quyền của người được chia sẻ tệp?',
  ['Người được chia sẻ','Chủ sở hữu tệp','Nhà cung cấp dịch vụ','Hệ điều hành'],1,
- 'Chủ sở hữu của thư mục, tệp quyết định chế độ chia sẻ (xem, nhận xét, chỉnh sửa).'],
+ 'Chủ sở hữu quyết định chế độ chia sẻ.'],
 ['mc6-14',6,'NB','Dịch vụ lưu trữ trực tuyến nào sau đây là của Microsoft?',
  ['Google Drive','iCloud','OneDrive','Dropbox'],2,
- 'OneDrive là dịch vụ lưu trữ trực tuyến của Microsoft.'],
+ 'OneDrive là dịch vụ của Microsoft.'],
 ['mc6-15',6,'NB','Dịch vụ lưu trữ trực tuyến nào sau đây là của Apple?',
  ['Google Drive','iCloud','OneDrive','Dropbox'],1,
- 'iCloud là dịch vụ lưu trữ trực tuyến của Apple.'],
+ 'iCloud là dịch vụ của Apple.'],
 
-// ---------- BÀI 7: THỰC HÀNH TÌM KIẾM THÔNG TIN TRÊN INTERNET (15 câu) ----------
 ['mc7-01',7,'NB','Máy tìm kiếm phổ biến nhất hiện nay là gì?',
  ['Facebook','Google','YouTube','Zalo'],1,
- 'Google là máy tìm kiếm phổ biến nhất hiện nay.'],
+ 'Google là máy tìm kiếm phổ biến nhất.'],
 ['mc7-02',7,'NB','Để tìm kiếm thông tin trên Internet, ta cần làm gì?',
  ['Nhập từ khoá vào máy tìm kiếm','Mở File Explorer','Khởi động lại máy','Cài đặt phần mềm'],0,
- 'Nhập từ khoá vào ô tìm kiếm của máy tìm kiếm rồi nhấn Enter.'],
+ 'Nhập từ khoá vào ô tìm kiếm rồi nhấn Enter.'],
 ['mc7-03',7,'NB','Để tìm kiếm chính xác cụm từ, ta đặt cụm từ trong dấu gì?',
  ['Dấu ngoặc đơn ( )','Dấu ngoặc kép " "','Dấu ngoặc vuông [ ]','Dấu sao *'],1,
- 'Đặt cụm từ cần tìm trong dấu nháy kép để thu hẹp phạm vi tìm kiếm, cho kết quả chính xác hơn.'],
+ 'Đặt cụm từ cần tìm trong dấu nháy kép.'],
 ['mc7-04',7,'NB','Để tìm kiếm tệp PDF, ta thêm từ khoá gì?',
  ['filetype:pdf','type:pdf','format:pdf','ext:pdf'],0,
- 'Thêm "filetype:pdf" vào từ khoá để tìm thông tin dưới dạng tệp PDF.'],
+ 'filetype:pdf dùng để tìm tệp PDF.'],
 ['mc7-05',7,'NB','Tìm kiếm bằng tiếng nói cần thiết bị gì?',
  ['Bàn phím','Micro','Chuột','Máy in'],1,
- 'Cần có micro để thực hiện tìm kiếm bằng tiếng nói.'],
+ 'Cần có micro để tìm kiếm bằng tiếng nói.'],
 ['mc7-06',7,'NB','Toán tử "filetype:" dùng để làm gì?',
  ['Chỉ định loại tệp cần tìm','Chỉ định ngôn ngữ','Chỉ định thời gian','Chỉ định trang web'],0,
- 'filetype: dùng để chỉ định dạng tệp chứa thông tin cần tìm (ví dụ: filetype:pdf).'],
+ 'filetype: dùng để chỉ định dạng tệp.'],
 ['mc7-07',7,'NB','Kết quả tìm kiếm có thể được phân loại theo dạng nào?',
  ['Chỉ văn bản','Tin tức, hình ảnh, video','Chỉ hình ảnh','Chỉ video'],1,
- 'Có thể tìm kiếm thông tin dạng hình ảnh, tin tức hay video bằng cách chọn dạng phân loại kết quả.'],
+ 'Có thể phân loại kết quả tìm kiếm.'],
 ['mc7-08',7,'TH','Khi tìm kiếm, nếu kết quả chưa như ý, ta nên làm gì?',
  ['Dừng tìm kiếm','Thay đổi từ khoá','Tắt máy','Xoá trình duyệt'],1,
- 'Quay lại bước nhập từ khoá với từ khoá khác để việc tìm kiếm hiệu quả hơn.'],
+ 'Thay đổi từ khoá để có kết quả tốt hơn.'],
 ['mc7-09',7,'TH','Dấu nháy kép trong tìm kiếm có tác dụng gì?',
  ['Tìm chính xác cụm từ','Loại bỏ từ khoá','Tìm kiếm nâng cao','Tìm kiếm hình ảnh'],0,
- 'Đặt cụm từ trong dấu nháy kép để tìm chính xác cụm từ đó.'],
+ 'Đặt cụm từ trong dấu nháy kép để tìm chính xác.'],
 ['mc7-10',7,'VD','Để tìm thông báo tuyển sinh dạng PDF, câu lệnh nào đúng?',
  ['tuyển sinh pdf','"tuyển sinh" + filetype:pdf','tuyển sinh file','pdf tuyển sinh'],1,
- 'Kết hợp dấu nháy kép để tìm chính xác cụm từ và filetype:pdf để lọc loại tệp.'],
+ 'Kết hợp dấu nháy kép và filetype:pdf.'],
 ['mc7-11',7,'NB','Trình duyệt web dùng để làm gì?',
  ['Truy cập Internet, tìm kiếm thông tin','Soạn thảo văn bản','Chỉnh sửa ảnh','Làm phim'],0,
- 'Trình duyệt web dùng để truy cập Internet, tìm kiếm thông tin.'],
+ 'Trình duyệt web dùng để truy cập Internet.'],
 ['mc7-12',7,'TH','Từ khoá tìm kiếm nên như thế nào để có kết quả chính xác?',
  ['Càng ngắn càng tốt','Cụ thể, rõ ràng','Chỉ dùng một từ','Không dấu'],1,
- 'Từ khoá càng cụ thể, rõ ràng càng cho kết quả chính xác.'],
+ 'Từ khoá càng cụ thể càng chính xác.'],
 ['mc7-13',7,'NB','Để tìm kiếm bằng tiếng nói trên Google, ta dùng biểu tượng gì?',
  ['Biểu tượng kính lúp','Biểu tượng micro','Biểu tượng camera','Biểu tượng bánh răng'],1,
- 'Nháy chuột vào biểu tượng micro cạnh ô nhập từ khoá để tìm kiếm bằng tiếng nói.'],
+ 'Nháy chuột vào biểu tượng micro.'],
 ['mc7-14',7,'TH','Để thu hẹp phạm vi tìm kiếm, ta có thể làm gì?',
  ['Dùng dấu nháy kép, toán tử tìm kiếm','Tắt máy','Mở nhiều tab','Đổi trình duyệt'],0,
- 'Dùng dấu nháy kép, toán tử filetype:, ... để thu hẹp phạm vi tìm kiếm.'],
+ 'Dùng dấu nháy kép, toán tử filetype:...'],
 ['mc7-15',7,'VD','Khi tìm thông tin về một trường đại học, để có kết quả chính xác hơn ta nên làm gì?',
  ['Đặt tên trường trong dấu nháy kép','Gõ tên trường không dấu','Chỉ gõ "đại học"','Gõ tên trường viết hoa'],0,
- 'Đặt tên trường trong dấu nháy kép để tìm chính xác cụm từ.'],
+ 'Đặt tên trường trong dấu nháy kép.'],
 
-// ---------- BÀI 8: THỰC HÀNH NÂNG CAO SỬ DỤNG THƯ ĐIỆN TỬ VÀ MẠNG XÃ HỘI (15 câu) ----------
 ['mc8-01',8,'NB','Gmail là dịch vụ gì?',
  ['Mạng xã hội','Thư điện tử','Lưu trữ trực tuyến','Trình duyệt web'],1,
  'Gmail là dịch vụ thư điện tử của Google.'],
 ['mc8-02',8,'NB','Để đánh dấu thư quan trọng trong Gmail, ta dùng gì?',
  ['Dấu sao (ngôi sao)','Dấu quan trọng màu vàng','Nhãn','Thư mục'],0,
- 'Gmail hỗ trợ đánh dấu thư quan trọng bằng dấu sao hoặc dấu quan trọng màu vàng.'],
+ 'Gmail hỗ trợ đánh dấu thư quan trọng.'],
 ['mc8-03',8,'TH','Gmail tự động xác định thư quan trọng dựa trên yếu tố nào?',
  ['Người gửi, tần suất, nội dung, hành vi người dùng','Kích thước tệp đính kèm','Màu sắc tiêu đề','Thời gian gửi'],0,
- 'Gmail dựa vào người gửi, tần suất gửi, thư được mở/trả lời, từ khoá, thư được gắn sao... để đánh dấu thư quan trọng.'],
+ 'Gmail dựa vào người gửi, tần suất, nội dung, hành vi.'],
 ['mc8-04',8,'NB','Để tìm tất cả thư quan trọng trong Gmail, ta dùng lệnh gì?',
  ['is:important','is:starred','is:unread','is:inbox'],0,
- 'Lệnh is:important hiển thị danh sách tất cả thư điện tử quan trọng.'],
+ 'is:important tìm tất cả thư quan trọng.'],
 ['mc8-05',8,'NB','Nhãn (Label) trong Gmail dùng để làm gì?',
  ['Xoá thư','Phân loại thư','Chặn người gửi','Đổi mật khẩu'],1,
- 'Nhãn dùng để sắp xếp, phân loại thư, giúp tiết kiệm thời gian tìm kiếm.'],
+ 'Nhãn dùng để phân loại thư.'],
 ['mc8-06',8,'TH','Nhãn khác thư mục ở điểm nào?',
  ['Nhãn không thể tạo mới','Khi xoá thư, thư bị xoá khỏi mọi nhãn đính kèm','Nhãn không thể đổi tên','Nhãn chỉ có một cái'],1,
- 'Khi xoá một thư, thư đó sẽ bị xoá khỏi mọi nhãn đính kèm cũng như trong hộp thư đến.'],
+ 'Khi xoá thư, thư bị xoá khỏi mọi nhãn.'],
 ['mc8-07',8,'NB','Để tạo nhãn mới trong Gmail, ta làm gì?',
  ['Vào Danh sách mở rộng, chọn Tạo nhãn mới','Nhấn phím Delete','Chọn File → New','Mở Cài đặt'],0,
- 'Nháy chuột vào Danh sách mở rộng bên trái cửa sổ, chọn Tạo nhãn mới.'],
+ 'Vào Danh sách mở rộng, chọn Tạo nhãn mới.'],
 ['mc8-08',8,'NB','Fanpage Facebook là gì?',
  ['Trang cá nhân','Trang web trên Facebook để quảng bá tổ chức, doanh nghiệp','Nhóm chat','Ứng dụng'],1,
- 'Fanpage là trang web trên Facebook giúp tổ chức, doanh nghiệp quảng bá hình ảnh, thương hiệu, sản phẩm.'],
+ 'Fanpage dùng để quảng bá tổ chức, doanh nghiệp.'],
 ['mc8-09',8,'NB','Để tạo Fanpage, ta vào đâu?',
  ['Menu → Tạo → Trang','Cài đặt → Trang cá nhân','Hộp thư → Tạo mới','Trang chủ → Đăng bài'],0,
- 'Nháy chuột vào biểu tượng Menu, trong mục Tạo chọn Trang.'],
+ 'Menu → Tạo → Trang.'],
 ['mc8-10',8,'NB','Cài đặt quyền riêng tư trên Facebook cho phép làm gì?',
  ['Kiểm soát người xem bài viết','Xoá tài khoản','Đổi mật khẩu','Tăng tốc độ mạng'],0,
- 'Cài đặt quyền riêng tư cho phép thiết lập những người có thể xem bài viết của mình.'],
+ 'Kiểm soát người xem bài viết.'],
 ['mc8-11',8,'NB','Trong Facebook, "Công khai" có nghĩa là gì?',
  ['Chỉ mình tôi xem','Bạn bè xem','Mọi người đều có thể xem','Chỉ người thân xem'],2,
- '"Công khai" có nghĩa là mọi người trên hoặc ngoài Facebook đều có thể xem.'],
+ '"Công khai" = mọi người đều có thể xem.'],
 ['mc8-12',8,'NB','Trong Facebook, "Chỉ mình tôi" có nghĩa là gì?',
  ['Chỉ mình tôi có thể xem','Bạn bè xem','Mọi người xem','Người thân xem'],0,
- '"Chỉ mình tôi" có nghĩa là chỉ mình tôi có thể xem nội dung.'],
+ '"Chỉ mình tôi" = chỉ mình xem.'],
 ['mc8-13',8,'TH','Để bảo vệ tài khoản mạng xã hội, ta nên làm gì?',
  ['Đặt mật khẩu mạnh, không chia sẻ mật khẩu','Chia sẻ mật khẩu cho bạn thân','Dùng chung tài khoản','Tắt xác thực hai lớp'],0,
- 'Đặt mật khẩu mạnh, không chia sẻ mật khẩu, bật xác thực hai lớp để bảo vệ tài khoản.'],
+ 'Đặt mật khẩu mạnh, không chia sẻ mật khẩu.'],
 ['mc8-14',8,'NB','Dấu sao (star) trong Gmail dùng để làm gì?',
  ['Đánh dấu thư quan trọng','Xoá thư','Chuyển thư','Đổi mật khẩu'],0,
- 'Dấu sao dùng để đánh dấu thư quan trọng hoặc thư cần chú ý.'],
+ 'Dấu sao dùng để đánh dấu thư quan trọng.'],
 ['mc8-15',8,'NB','Để tìm thư theo nhãn trong Gmail, ta làm gì?',
  ['Nháy chuột vào tên nhãn ở danh sách bên trái','Nhấn phím Delete','Chọn File → New','Mở Cài đặt'],0,
- 'Nháy chuột vào tên nhãn ở danh sách bên trái để xem các thư được gán nhãn đó.'],
+ 'Nháy chuột vào tên nhãn ở danh sách bên trái.'],
 ];
 
 const TF = [
-// ---------- BÀI 1 ----------
 ['tf1-01',1,'TH','Đánh giá các nhận định sau về chức năng của hệ điều hành:',[
- ['Hệ điều hành quản lý thiết bị như CPU, bộ nhớ, thiết bị ngoại vi.',true,'Quản lý thiết bị là một trong 5 nhóm chức năng chính của hệ điều hành.'],
- ['Hệ điều hành không cần cung cấp môi trường giao tiếp với người sử dụng.',false,'Cung cấp môi trường giao tiếp với người sử dụng là một trong 5 nhóm chức năng chính.'],
- ['Hệ điều hành tổ chức thực hiện các chương trình, điều phối tài nguyên cho các tiến trình.',true,'Đây là chức năng quan trọng giúp chạy nhiều ứng dụng đồng thời.'],
- ['Hệ điều hành chỉ cần thiết cho máy chủ, không cần cho máy tính cá nhân.',false,'Máy tính cá nhân cũng cần hệ điều hành để quản lý tài nguyên và cung cấp giao diện.'],
+ ['Hệ điều hành quản lý thiết bị như CPU, bộ nhớ, thiết bị ngoại vi.',true,'Quản lý thiết bị là một trong 5 nhóm chức năng chính.'],
+ ['Hệ điều hành không cần cung cấp môi trường giao tiếp với người sử dụng.',false,'Cung cấp môi trường giao tiếp là một trong 5 nhóm chức năng chính.'],
+ ['Hệ điều hành tổ chức thực hiện các chương trình, điều phối tài nguyên cho các tiến trình.',true,'Đây là chức năng quan trọng.'],
+ ['Hệ điều hành chỉ cần thiết cho máy chủ, không cần cho máy tính cá nhân.',false,'Máy tính cá nhân cũng cần hệ điều hành.'],
 ]],
 ['tf1-02',1,'TH','Đánh giá các nhận định sau về lịch sử phát triển hệ điều hành:',[
- ['Windows 95 là phiên bản đầu tiên sử dụng cơ chế plug & play.',true,'Cơ chế plug & play lần đầu tiên được sử dụng từ Windows 95.'],
+ ['Windows 95 là phiên bản đầu tiên sử dụng cơ chế plug & play.',true,'Plug & play lần đầu tiên được sử dụng từ Windows 95.'],
  ['Linux được viết bởi Bill Gates.',false,'Linux do Linus Torvalds viết năm 1991.'],
- ['Android được xây dựng trên lõi của hệ điều hành Linux.',true,'Android của Google được xây dựng trên lõi Linux.'],
+ ['Android được xây dựng trên lõi của hệ điều hành Linux.',true,'Android được xây dựng trên lõi Linux.'],
  ['Hệ điều hành máy tính cá nhân phát triển theo hướng khó sử dụng hơn.',false,'Hệ điều hành phát triển theo hướng ngày càng dễ sử dụng.'],
 ]],
 ['tf1-03',1,'TH','Đánh giá các nhận định sau về hệ điều hành cho thiết bị di động:',[
  ['iOS là hệ điều hành của Apple dùng cho iPhone, iPad.',true,'iOS của Apple dùng cho iPhone, iPad.'],
- ['Hệ điều hành di động không cần hỗ trợ kết nối mạng không dây.',false,'Do tính di động, hệ điều hành di động rất chú trọng kết nối mạng không dây.'],
- ['Hệ điều hành di động chú trọng đến khả năng kết nối mạng không dây như Wi-Fi, 4G, 5G, Bluetooth.',true,'Đây là đặc điểm nổi bật của hệ điều hành di động.'],
+ ['Hệ điều hành di động không cần hỗ trợ kết nối mạng không dây.',false,'Hệ điều hành di động rất chú trọng kết nối mạng không dây.'],
+ ['Hệ điều hành di động chú trọng đến khả năng kết nối mạng không dây như Wi-Fi, 4G, 5G, Bluetooth.',true,'Đây là đặc điểm nổi bật.'],
  ['Android là hệ điều hành duy nhất cho thiết bị di động.',false,'Còn có iOS và một số hệ điều hành khác.'],
 ]],
 ['tf1-04',1,'TH','Đánh giá các nhận định sau về quan hệ giữa phần cứng, hệ điều hành và phần mềm ứng dụng:',[
  ['Phần cứng là thiết bị xử lý thông tin.',true,'Phần cứng thực hiện xử lý thông tin theo chương trình.'],
  ['Phần mềm ứng dụng trực tiếp điều khiển phần cứng, không cần qua hệ điều hành.',false,'Phần mềm ứng dụng khai thác phần cứng thông qua hệ điều hành.'],
  ['Hệ điều hành là môi trường trung gian giúp phần mềm ứng dụng khai thác phần cứng.',true,'Đây là vai trò quan trọng của hệ điều hành.'],
- ['Hệ điều hành cung cấp các dịch vụ mà nhiều chương trình ứng dụng cần đến.',true,'Ví dụ dịch vụ tìm kiếm tệp, mở tệp, ghi dữ liệu...'],
+ ['Hệ điều hành cung cấp các dịch vụ mà nhiều chương trình ứng dụng cần đến.',true,'Ví dụ dịch vụ tìm kiếm tệp, mở tệp, ghi dữ liệu.'],
 ]],
 ['tf1-05',1,'TH','Đánh giá các nhận định sau về chức năng chi tiết của hệ điều hành:',[
  ['Hệ điều hành cung cấp một số tiện ích như định dạng đĩa, nén tệp, kiểm tra lỗi đĩa cứng.',true,'Đây là nhóm chức năng cung cấp tiện ích.'],
  ['Hệ điều hành không thể quản lý tệp và thư mục.',false,'Quản lý tệp và thư mục là một trong các chức năng chính.'],
  ['Hệ điều hành hiện đại cho phép chạy đồng thời nhiều chương trình (đa nhiệm).',true,'Đa nhiệm là tính năng của hầu hết hệ điều hành hiện đại.'],
- ['Mọi hệ điều hành đều phải có giao diện đồ họa.',false,'Có hệ điều hành dùng giao diện dòng lệnh, không nhất thiết phải có giao diện đồ họa.'],
+ ['Mọi hệ điều hành đều phải có giao diện đồ họa.',false,'Có hệ điều hành dùng giao diện dòng lệnh.'],
 ]],
-
-// ---------- BÀI 2 ----------
 ['tf2-01',2,'TH','Đánh giá các nhận định sau về giao diện Windows:',[
- ['Thanh công việc (Taskbar) hiển thị các ứng dụng đang chạy.',true,'Thanh công việc hiển thị các ứng dụng đang chạy và các tiện ích.'],
+ ['Thanh công việc (Taskbar) hiển thị các ứng dụng đang chạy.',true,'Thanh công việc hiển thị các ứng dụng đang chạy.'],
  ['Thanh trạng thái hiển thị tình trạng kết nối mạng, pin, mức loa.',true,'Đây là chức năng của thanh trạng thái.'],
- ['Cửa sổ là vùng hình chữ nhật trên màn hình dành cho một ứng dụng.',true,'Cửa sổ là vùng hình chữ nhật dành cho một ứng dụng.'],
- ['Biểu tượng (icon) không thể dùng để mở ứng dụng.',false,'Nháy đúp chuột vào biểu tượng để mở ứng dụng tương ứng.'],
+ ['Cửa sổ là vùng hình chữ nhật trên màn hình dành cho một ứng dụng.',true,'Đúng định nghĩa cửa sổ.'],
+ ['Biểu tượng (icon) không thể dùng để mở ứng dụng.',false,'Nháy đúp chuột vào biểu tượng để mở ứng dụng.'],
 ]],
 ['tf2-02',2,'TH','Đánh giá các nhận định sau về File Explorer:',[
- ['File Explorer cho phép tạo, đổi tên, xoá, di chuyển thư mục.',true,'Đây là các thao tác quản lý thư mục cơ bản trong File Explorer.'],
- ['Không thể sao chép tệp trong File Explorer.',false,'Có thể sao chép, di chuyển, đổi tên, xoá tệp trong File Explorer.'],
- ['Nháy đúp chuột vào tệp ứng dụng sẽ kích hoạt ứng dụng tương ứng.',true,'Nháy đúp chuột vào tệp ứng dụng để mở ứng dụng đó.'],
+ ['File Explorer cho phép tạo, đổi tên, xoá, di chuyển thư mục.',true,'Đây là các thao tác cơ bản trong File Explorer.'],
+ ['Không thể sao chép tệp trong File Explorer.',false,'Có thể sao chép, di chuyển, đổi tên, xoá tệp.'],
+ ['Nháy đúp chuột vào tệp ứng dụng sẽ kích hoạt ứng dụng tương ứng.',true,'Đúng thao tác mở ứng dụng.'],
  ['File Explorer chỉ hiển thị tệp, không hiển thị thư mục.',false,'File Explorer hiển thị cả tệp và thư mục.'],
 ]],
 ['tf2-03',2,'TH','Đánh giá các nhận định sau về đĩa cứng:',[
- ['Đĩa cứng ghi dữ liệu theo các đường tròn đồng tâm gọi là track.',true,'Track (đường ghi) là các đường tròn đồng tâm trên đĩa cứng.'],
+ ['Đĩa cứng ghi dữ liệu theo các đường tròn đồng tâm gọi là track.',true,'Track là các đường tròn đồng tâm.'],
  ['Mỗi cung (sector) ghi được 1024 byte.',false,'Mỗi cung ghi được 512 byte.'],
  ['Liên cung (cluster) thường gồm 8 cung.',true,'Theo SGK, liên cung thường gồm 8 cung.'],
- ['Hợp mảnh đĩa giúp tăng tốc độ truy cập đĩa cứng.',true,'Hợp mảnh giúp giảm hoạt động di chuyển đầu từ, tăng tốc độ truy cập.'],
+ ['Hợp mảnh đĩa giúp tăng tốc độ truy cập đĩa cứng.',true,'Hợp mảnh giúp tăng tốc độ truy cập.'],
 ]],
 ['tf2-04',2,'TH','Đánh giá các nhận định sau về tiện ích hệ điều hành:',[
- ['Tiện ích nén tệp giúp giảm dung lượng lưu trữ.',true,'Nén tệp giúp giảm dung lượng lưu trữ.'],
+ ['Tiện ích nén tệp giúp giảm dung lượng lưu trữ.',true,'Nén tệp giúp giảm dung lượng.'],
  ['Tiện ích kiểm tra đĩa (Check disk) dùng để khử lỗi đĩa.',true,'Check disk dùng để khử các lỗi đĩa.'],
  ['Tiện ích hợp mảnh đĩa (Optimize) chỉ có tác dụng với đĩa quang.',false,'Chức năng hợp mảnh chỉ có tác dụng với đĩa từ.'],
- ['Tiện ích dọn đĩa (Disk Cleanup) giúp giải phóng dung lượng ổ đĩa.',true,'Disk Cleanup giúp dọn dẹp các tệp không cần thiết, giải phóng dung lượng.'],
+ ['Tiện ích dọn đĩa (Disk Cleanup) giúp giải phóng dung lượng ổ đĩa.',true,'Disk Cleanup giúp giải phóng dung lượng.'],
 ]],
 ['tf2-05',2,'TH','Đánh giá các nhận định sau về tiện ích trên thiết bị di động:',[
- ['Tiện ích đồng hồ trên điện thoại có thể đặt nhắc hẹn.',true,'Đồng hồ cho phép đặt nhắc hẹn (một lần hoặc định kỳ).'],
+ ['Tiện ích đồng hồ trên điện thoại có thể đặt nhắc hẹn.',true,'Đồng hồ cho phép đặt nhắc hẹn.'],
  ['Danh bạ trên điện thoại không thể chia sẻ thông tin liên hệ.',false,'Danh bạ cho phép chia sẻ thông tin liên hệ.'],
- ['Trên điện thoại, có thể quản lý ứng dụng (cài đặt, gỡ bỏ).',true,'Có thể xem, cài đặt, gỡ bỏ ứng dụng trên điện thoại.'],
- ['Đồng hồ trên điện thoại chỉ có chức năng xem giờ.',false,'Đồng hồ còn có chức năng bấm giờ, đếm ngược, nhắc hẹn.'],
+ ['Trên điện thoại, có thể quản lý ứng dụng (cài đặt, gỡ bỏ).',true,'Có thể xem, cài đặt, gỡ bỏ ứng dụng.'],
+ ['Đồng hồ trên điện thoại chỉ có chức năng xem giờ.',false,'Đồng hồ còn có bấm giờ, đếm ngược, nhắc hẹn.'],
 ]],
-
-// ---------- BÀI 3 ----------
 ['tf3-01',3,'TH','Đánh giá các nhận định sau về phần mềm thương mại:',[
- ['Phần mềm thương mại là phần mềm để bán.',true,'Phần mềm thương mại là phần mềm để bán.'],
- ['Hầu hết phần mềm thương mại là nguồn đóng.',true,'Hầu hết phần mềm thương mại là nguồn đóng để bảo vệ ý tưởng và chống sửa đổi.'],
- ['Phần mềm thương mại không bao giờ có bản miễn phí.',false,'Có những phần mềm thương mại có bản miễn phí giới hạn tính năng.'],
- ['Người dùng phải mua giấy phép để sử dụng phần mềm thương mại.',true,'Người dùng phải mua giấy phép sử dụng phần mềm thương mại.'],
+ ['Phần mềm thương mại là phần mềm để bán.',true,'Đúng định nghĩa.'],
+ ['Hầu hết phần mềm thương mại là nguồn đóng.',true,'Hầu hết là nguồn đóng.'],
+ ['Phần mềm thương mại không bao giờ có bản miễn phí.',false,'Có những phần mềm thương mại có bản miễn phí giới hạn.'],
+ ['Người dùng phải mua giấy phép để sử dụng phần mềm thương mại.',true,'Đúng.'],
 ]],
 ['tf3-02',3,'TH','Đánh giá các nhận định sau về phần mềm nguồn mở:',[
- ['Phần mềm nguồn mở cung cấp mã nguồn cho người dùng.',true,'Đây là đặc điểm cơ bản của phần mềm nguồn mở.'],
- ['Phần mềm nguồn mở không được phép sửa đổi.',false,'Phần mềm nguồn mở cho phép sửa đổi, cải tiến, phát triển.'],
- ['Giấy phép GNU GPL là một giấy phép phần mềm nguồn mở.',true,'GNU GPL là giấy phép điển hình cho phần mềm nguồn mở.'],
+ ['Phần mềm nguồn mở cung cấp mã nguồn cho người dùng.',true,'Đây là đặc điểm cơ bản.'],
+ ['Phần mềm nguồn mở không được phép sửa đổi.',false,'Phần mềm nguồn mở cho phép sửa đổi.'],
+ ['Giấy phép GNU GPL là một giấy phép phần mềm nguồn mở.',true,'GNU GPL là giấy phép điển hình.'],
  ['Linux, GIMP, MySQL là các phần mềm nguồn mở.',true,'Đây đều là các phần mềm nguồn mở.'],
 ]],
 ['tf3-03',3,'TH','Đánh giá các nhận định sau về phần mềm trực tuyến:',[
- ['Phần mềm trực tuyến cần cài đặt vào máy tính.',false,'Phần mềm trực tuyến dùng qua Internet, không cần cài đặt.'],
+ ['Phần mềm trực tuyến cần cài đặt vào máy tính.',false,'Không cần cài đặt.'],
  ['Google Docs là phần mềm trực tuyến.',true,'Google Docs là phần mềm soạn thảo trực tuyến.'],
  ['Phần mềm trực tuyến có thể sử dụng ở bất cứ đâu có Internet.',true,'Đây là ưu điểm của phần mềm trực tuyến.'],
- ['Phần mềm trực tuyến luôn có chi phí cao.',false,'Nhiều phần mềm trực tuyến miễn phí hoặc chi phí rẻ.'],
+ ['Phần mềm trực tuyến luôn có chi phí cao.',false,'Nhiều phần mềm trực tuyến miễn phí.'],
 ]],
 ['tf3-04',3,'TH','Đánh giá các nhận định sau về giấy phép phần mềm:',[
- ['Giấy phép phần mềm quy định điều kiện sử dụng phần mềm.',true,'Đây là ý nghĩa của giấy phép phần mềm.'],
- ['GNU GPL yêu cầu công bố rõ các thay đổi khi sửa đổi phần mềm.',true,'GPL yêu cầu công bố rõ các thay đổi, chỉ rõ các thành phần được thay đổi.'],
- ['Phần mềm nguồn mở không cần tuân thủ giấy phép.',false,'Phần mềm nguồn mở vẫn cần tuân thủ giấy phép đi kèm.'],
- ['Phần mềm sửa đổi từ phần mềm GPL phải mở theo GPL.',true,'Đây là điều khoản quan trọng của giấy phép GPL.'],
+ ['Giấy phép phần mềm quy định điều kiện sử dụng phần mềm.',true,'Đây là ý nghĩa của giấy phép.'],
+ ['GNU GPL yêu cầu công bố rõ các thay đổi khi sửa đổi phần mềm.',true,'GPL yêu cầu công bố rõ các thay đổi.'],
+ ['Phần mềm nguồn mở không cần tuân thủ giấy phép.',false,'Vẫn cần tuân thủ giấy phép.'],
+ ['Phần mềm sửa đổi từ phần mềm GPL phải mở theo GPL.',true,'Đây là điều khoản quan trọng của GPL.'],
 ]],
 ['tf3-05',3,'TH','Đánh giá các nhận định sau về vai trò của các loại phần mềm:',[
- ['Phần mềm thương mại là nguồn thu nhập chính của các tổ chức làm phần mềm.',true,'Đây là nguồn tài chính chủ yếu để duy trì các tổ chức làm phần mềm.'],
- ['Phần mềm nguồn mở chỉ dùng cho mục đích cá nhân.',false,'Phần mềm nguồn mở được dùng cả cho tổ chức, doanh nghiệp.'],
+ ['Phần mềm thương mại là nguồn thu nhập chính của các tổ chức làm phần mềm.',true,'Đây là nguồn tài chính chủ yếu.'],
+ ['Phần mềm nguồn mở chỉ dùng cho mục đích cá nhân.',false,'Được dùng cả cho tổ chức, doanh nghiệp.'],
  ['Phần mềm nguồn mở giúp người dùng tiếp cận phần mềm chất lượng với chi phí thấp.',true,'Đây là lợi ích của phần mềm nguồn mở.'],
- ['Phần mềm thương mại và nguồn mở cùng tồn tại và bổ sung cho nhau.',true,'Phần mềm nguồn mở đáp ứng nhu cầu chung, phần mềm thương mại đáp ứng nhu cầu riêng.'],
+ ['Phần mềm thương mại và nguồn mở cùng tồn tại và bổ sung cho nhau.',true,'Hai loại bổ sung cho nhau.'],
 ]],
-
-// ---------- BÀI 4 ----------
 ['tf4-01',4,'TH','Đánh giá các nhận định sau về CPU:',[
- ['CPU là thành phần quan trọng nhất của máy tính.',true,'CPU đảm nhận việc thực hiện các chương trình máy tính.'],
- ['CPU đa lõi cho phép xử lý song song nhiều công việc.',true,'CPU đa lõi có nhiều đơn vị xử lý, cho phép xử lý song song.'],
- ['CPU chỉ có một lõi.',false,'CPU có thể có nhiều lõi (đa lõi).'],
+ ['CPU là thành phần quan trọng nhất của máy tính.',true,'CPU đảm nhận việc thực hiện các chương trình.'],
+ ['CPU đa lõi cho phép xử lý song song nhiều công việc.',true,'Đa lõi cho phép xử lý song song.'],
+ ['CPU chỉ có một lõi.',false,'CPU có thể có nhiều lõi.'],
  ['Thanh ghi là vùng nhớ đặc biệt để lưu trữ tạm thời lệnh và dữ liệu.',true,'Thanh ghi giúp CPU truy cập với tốc độ rất nhanh.'],
 ]],
 ['tf4-02',4,'TH','Đánh giá các nhận định sau về bộ nhớ trong:',[
@@ -1436,154 +1578,142 @@ const TF = [
 ['tf4-03',4,'TH','Đánh giá các nhận định sau về bộ nhớ ngoài:',[
  ['Bộ nhớ ngoài dùng để lưu trữ dữ liệu lâu dài.',true,'Đây là chức năng của bộ nhớ ngoài.'],
  ['Bộ nhớ ngoài có giá thành cao hơn RAM.',false,'Bộ nhớ ngoài có giá thành rẻ hơn RAM.'],
- ['Đĩa SSD có tốc độ truy cập nhanh hơn đĩa cứng từ.',true,'SSD có tốc độ truy cập nhanh hơn đĩa cứng từ.'],
- ['Đĩa quang là một loại bộ nhớ ngoài.',true,'Đĩa quang là một loại bộ nhớ ngoài.'],
+ ['Đĩa SSD có tốc độ truy cập nhanh hơn đĩa cứng từ.',true,'SSD nhanh hơn HDD.'],
+ ['Đĩa quang là một loại bộ nhớ ngoài.',true,'Đĩa quang là bộ nhớ ngoài.'],
 ]],
 ['tf4-04',4,'TH','Đánh giá các nhận định sau về phép toán logic:',[
- ['AND cho kết quả 1 khi cả hai đầu vào đều bằng 1.',true,'Đây là bảng chân lý của AND.'],
- ['OR cho kết quả 1 khi ít nhất một đầu vào bằng 1.',true,'Đây là bảng chân lý của OR.'],
+ ['AND cho kết quả 1 khi cả hai đầu vào đều bằng 1.',true,'Bảng chân lý của AND.'],
+ ['OR cho kết quả 1 khi ít nhất một đầu vào bằng 1.',true,'Bảng chân lý của OR.'],
  ['NOT của 0 là 0.',false,'NOT của 0 là 1.'],
- ['XOR cho kết quả 1 khi hai đầu vào khác nhau.',true,'Đây là bảng chân lý của XOR.'],
+ ['XOR cho kết quả 1 khi hai đầu vào khác nhau.',true,'Bảng chân lý của XOR.'],
 ]],
 ['tf4-05',4,'TH','Đánh giá các nhận định sau về hệ nhị phân và mạch logic:',[
- ['Hệ nhị phân chỉ dùng hai chữ số 0 và 1.',true,'Đây là đặc điểm của hệ nhị phân.'],
- ['Số 5 trong hệ nhị phân là 101.',true,'5 = 4 + 1 = 1×2² + 0×2¹ + 1×2⁰ = 101.'],
- ['Phép cộng nhị phân 1 + 1 = 10.',true,'1 + 1 = 2, trong hệ nhị phân là 10.'],
+ ['Hệ nhị phân chỉ dùng hai chữ số 0 và 1.',true,'Đặc điểm của hệ nhị phân.'],
+ ['Số 5 trong hệ nhị phân là 101.',true,'5 = 101₂.'],
+ ['Phép cộng nhị phân 1 + 1 = 10.',true,'1+1=2, trong nhị phân là 10.'],
  ['Mọi mạch logic có thể xây dựng từ các cổng AND, OR, NOT.',true,'Đây là tính chất quan trọng của mạch logic.'],
 ]],
-
-// ---------- BÀI 5 ----------
 ['tf5-01',5,'TH','Đánh giá các nhận định sau về thiết bị vào ra:',[
- ['Bàn phím, chuột là thiết bị vào.',true,'Bàn phím, chuột cho phép nhập dữ liệu vào máy tính.'],
- ['Màn hình, máy in là thiết bị ra.',true,'Màn hình, máy in đưa thông tin từ máy tính ra ngoài.'],
- ['USB vừa là thiết bị vào vừa là thiết bị ra.',true,'USB có thể trao đổi dữ liệu hai chiều.'],
+ ['Bàn phím, chuột là thiết bị vào.',true,'Đều là thiết bị vào.'],
+ ['Màn hình, máy in là thiết bị ra.',true,'Đều là thiết bị ra.'],
+ ['USB vừa là thiết bị vào vừa là thiết bị ra.',true,'USB trao đổi hai chiều.'],
  ['Máy chiếu là thiết bị vào.',false,'Máy chiếu là thiết bị ra.'],
 ]],
 ['tf5-02',5,'TH','Đánh giá các nhận định sau về màn hình:',[
- ['Kích thước màn hình đo bằng độ dài đường chéo, tính theo inch.',true,'Đây là cách đo kích thước màn hình.'],
- ['Độ phân giải càng cao thì màn hình càng nét.',true,'Số điểm ảnh càng lớn thì màn hình càng nét.'],
- ['Tần số quét càng thấp thì ảnh càng mượt.',false,'Tần số quét cao giúp ảnh không bị giật, mượt hơn.'],
- ['Thời gian phản hồi càng nhỏ thì chất lượng màn hình càng tốt.',true,'Thời gian phản hồi nhỏ giúp màn hình chất lượng tốt hơn.'],
+ ['Kích thước màn hình đo bằng độ dài đường chéo, tính theo inch.',true,'Đây là cách đo.'],
+ ['Độ phân giải càng cao thì màn hình càng nét.',true,'Đúng.'],
+ ['Tần số quét càng thấp thì ảnh càng mượt.',false,'Tần số quét cao giúp ảnh mượt hơn.'],
+ ['Thời gian phản hồi càng nhỏ thì chất lượng màn hình càng tốt.',true,'Thời gian phản hồi nhỏ tốt hơn.'],
 ]],
 ['tf5-03',5,'TH','Đánh giá các nhận định sau về máy in:',[
- ['Máy in laser dùng tia laser để tạo hình ảnh.',true,'Máy in laser dùng tia laser để tạo sự thay đổi điện áp trên trống tĩnh điện.'],
+ ['Máy in laser dùng tia laser để tạo hình ảnh.',true,'Đúng nguyên lý máy in laser.'],
  ['Máy in kim có chất lượng ảnh cao nhất.',false,'Máy in kim có chất lượng ảnh thấp.'],
- ['Máy in phun thích hợp để in ảnh màu.',true,'Máy in phun phù hợp để in ảnh màu, phông bạt.'],
- ['Độ phân giải máy in đo bằng dpi.',true,'Độ phân giải máy in đo bằng dpi (dots per inch).'],
+ ['Máy in phun thích hợp để in ảnh màu.',true,'Máy in phun phù hợp in ảnh màu.'],
+ ['Độ phân giải máy in đo bằng dpi.',true,'Đơn vị là dpi.'],
 ]],
 ['tf5-04',5,'TH','Đánh giá các nhận định sau về cổng kết nối:',[
- ['Cổng VGA truyền tín hiệu số.',false,'Cổng VGA truyền tín hiệu tương tự (analog).'],
- ['Cổng HDMI truyền cả âm thanh và hình ảnh.',true,'HDMI truyền tín hiệu số, cả âm thanh và hình ảnh.'],
- ['USB là cổng kết nối phổ biến, đa năng.',true,'USB là cổng kết nối phổ biến, đa năng.'],
- ['Cổng mạng dùng để kết nối máy tính với mạng LAN.',true,'Cổng mạng dùng để kết nối máy tính với mạng.'],
+ ['Cổng VGA truyền tín hiệu số.',false,'Cổng VGA truyền tín hiệu tương tự.'],
+ ['Cổng HDMI truyền cả âm thanh và hình ảnh.',true,'HDMI truyền cả âm thanh và hình ảnh.'],
+ ['USB là cổng kết nối phổ biến, đa năng.',true,'USB phổ biến, đa năng.'],
+ ['Cổng mạng dùng để kết nối máy tính với mạng LAN.',true,'Cổng mạng kết nối với mạng LAN.'],
 ]],
 ['tf5-05',5,'TH','Đánh giá các nhận định sau về Bluetooth:',[
- ['Bluetooth là kết nối không dây trong khoảng cách gần (dưới 10m).',true,'Bluetooth hoạt động trong khoảng cách gần (dưới 10m).'],
+ ['Bluetooth là kết nối không dây trong khoảng cách gần (dưới 10m).',true,'Bluetooth trong khoảng cách gần.'],
  ['Mỗi thiết bị có thể kết nối Bluetooth với nhiều thiết bị cùng lúc.',false,'Theo SGK, tại mỗi thời điểm, mỗi thiết bị chỉ có thể kết nối Bluetooth với một thiết bị khác.'],
- ['Cần ghép đôi (pairing) trước khi kết nối Bluetooth.',true,'Cần ghép đôi trước khi kết nối Bluetooth.'],
+ ['Cần ghép đôi (pairing) trước khi kết nối Bluetooth.',true,'Cần ghép đôi trước khi kết nối.'],
  ['Bluetooth dùng để truyền tệp, âm thanh, điều khiển thiết bị.',true,'Đây là các ứng dụng của Bluetooth.'],
 ]],
-
-// ---------- BÀI 6 ----------
 ['tf6-01',6,'TH','Đánh giá các nhận định sau về lưu trữ trực tuyến:',[
- ['Lưu trữ trực tuyến còn gọi là lưu trữ đám mây.',true,'Đây là cách gọi khác của dịch vụ lưu trữ trực tuyến.'],
- ['Lưu trữ trực tuyến không cần kết nối Internet.',false,'Lưu trữ trực tuyến cần kết nối Internet để truy cập.'],
- ['Google Drive, Dropbox, OneDrive là dịch vụ lưu trữ trực tuyến.',true,'Đây đều là các dịch vụ lưu trữ trực tuyến.'],
- ['Lưu trữ trực tuyến không có giới hạn dung lượng.',false,'Các dịch vụ lưu trữ trực tuyến đều có giới hạn dung lượng (miễn phí hoặc trả phí).'],
+ ['Lưu trữ trực tuyến còn gọi là lưu trữ đám mây.',true,'Đây là cách gọi khác.'],
+ ['Lưu trữ trực tuyến không cần kết nối Internet.',false,'Cần kết nối Internet để truy cập.'],
+ ['Google Drive, Dropbox, OneDrive là dịch vụ lưu trữ trực tuyến.',true,'Đều là dịch vụ lưu trữ trực tuyến.'],
+ ['Lưu trữ trực tuyến không có giới hạn dung lượng.',false,'Các dịch vụ đều có giới hạn dung lượng.'],
 ]],
 ['tf6-02',6,'TH','Đánh giá các nhận định sau về chia sẻ tệp:',[
- ['Có 3 chế độ chia sẻ: xem, nhận xét, chỉnh sửa.',true,'Đây là 3 chế độ chia sẻ trên ổ đĩa trực tuyến.'],
- ['Quyền "xem" cho phép người nhận chỉnh sửa tệp.',false,'Quyền "xem" chỉ cho phép xem, không cho chỉnh sửa.'],
- ['Quyền "chỉnh sửa" là quyền cao nhất.',true,'Quyền chỉnh sửa là quyền cao nhất.'],
+ ['Có 3 chế độ chia sẻ: xem, nhận xét, chỉnh sửa.',true,'Đây là 3 chế độ chia sẻ.'],
+ ['Quyền "xem" cho phép người nhận chỉnh sửa tệp.',false,'Quyền "xem" chỉ cho phép xem.'],
+ ['Quyền "chỉnh sửa" là quyền cao nhất.',true,'Quyền chỉnh sửa là cao nhất.'],
  ['Chủ sở hữu có thể thay đổi quyền chia sẻ sau khi đã chia sẻ.',true,'Có thể huỷ bỏ hoặc thay đổi chế độ chia sẻ.'],
 ]],
 ['tf6-03',6,'TH','Đánh giá các nhận định sau về Google Drive:',[
  ['Google Drive là dịch vụ lưu trữ trực tuyến của Google.',true,'Đây là dịch vụ của Google.'],
- ['Google Drive không thể tạo thư mục.',false,'Google Drive cho phép tạo và quản lý thư mục.'],
- ['Google Drive cho phép tải tệp lên và tải xuống.',true,'Google Drive cho phép tải tệp lên và xuống.'],
- ['Google Drive yêu cầu tài khoản Google để sử dụng.',true,'Cần có tài khoản Google để sử dụng Google Drive.'],
+ ['Google Drive không thể tạo thư mục.',false,'Có thể tạo và quản lý thư mục.'],
+ ['Google Drive cho phép tải tệp lên và tải xuống.',true,'Cho phép tải lên và xuống.'],
+ ['Google Drive yêu cầu tài khoản Google để sử dụng.',true,'Cần tài khoản Google.'],
 ]],
 ['tf6-04',6,'TH','Đánh giá các nhận định sau về ổ đĩa trực tuyến:',[
  ['Ổ đĩa trực tuyến là không gian lưu trữ trên Internet.',true,'Đây là khái niệm ổ đĩa trực tuyến.'],
- ['Ổ đĩa trực tuyến có thể truy cập từ nhiều thiết bị.',true,'Có thể truy cập từ máy tính, điện thoại, máy tính bảng.'],
- ['Ổ đĩa trực tuyến không thể chia sẻ tệp.',false,'Ổ đĩa trực tuyến cho phép chia sẻ tệp.'],
- ['Ổ đĩa trực tuyến cho phép quản lý tệp, thư mục.',true,'Có thể tạo mới, đổi tên, xoá, di chuyển tệp và thư mục.'],
+ ['Ổ đĩa trực tuyến có thể truy cập từ nhiều thiết bị.',true,'Có thể truy cập từ nhiều thiết bị.'],
+ ['Ổ đĩa trực tuyến không thể chia sẻ tệp.',false,'Có thể chia sẻ tệp.'],
+ ['Ổ đĩa trực tuyến cho phép quản lý tệp, thư mục.',true,'Có thể tạo, đổi tên, xoá, di chuyển.'],
 ]],
 ['tf6-05',6,'TH','Đánh giá các nhận định sau về dịch vụ lưu trữ:',[
  ['Dropbox là dịch vụ lưu trữ trực tuyến.',true,'Dropbox là dịch vụ lưu trữ trực tuyến.'],
  ['iCloud là dịch vụ lưu trữ trực tuyến của Apple.',true,'iCloud là dịch vụ của Apple.'],
- ['Tất cả dịch vụ lưu trữ trực tuyến đều miễn phí hoàn toàn.',false,'Nhiều dịch vụ có bản miễn phí giới hạn và bản trả phí.'],
+ ['Tất cả dịch vụ lưu trữ trực tuyến đều miễn phí hoàn toàn.',false,'Có bản miễn phí giới hạn và bản trả phí.'],
  ['Khi chia sẻ tệp, người nhận có thể xem nếu được cấp quyền xem.',true,'Quyền xem cho phép người nhận xem tệp.'],
 ]],
-
-// ---------- BÀI 7 ----------
 ['tf7-01',7,'TH','Đánh giá các nhận định sau về tìm kiếm cơ bản:',[
- ['Google là một máy tìm kiếm.',true,'Google là máy tìm kiếm phổ biến nhất.'],
- ['Chỉ có Google mới là máy tìm kiếm.',false,'Còn có Bing, Yahoo, ...'],
- ['Từ khoá tìm kiếm càng cụ thể càng cho kết quả chính xác.',true,'Từ khoá cụ thể giúp thu hẹp phạm vi, cho kết quả chính xác hơn.'],
+ ['Google là một máy tìm kiếm.',true,'Google là máy tìm kiếm phổ biến.'],
+ ['Chỉ có Google mới là máy tìm kiếm.',false,'Còn có Bing, Yahoo...'],
+ ['Từ khoá tìm kiếm càng cụ thể càng cho kết quả chính xác.',true,'Từ khoá cụ thể cho kết quả chính xác hơn.'],
  ['Không thể tìm kiếm bằng tiếng nói.',false,'Có thể tìm kiếm bằng tiếng nói nếu có micro.'],
 ]],
 ['tf7-02',7,'TH','Đánh giá các nhận định sau về toán tử tìm kiếm:',[
- ['Dấu nháy kép dùng để tìm chính xác cụm từ.',true,'Đặt cụm từ trong dấu nháy kép để tìm chính xác.'],
- ['filetype:pdf dùng để tìm tệp PDF.',true,'filetype:pdf dùng để tìm tệp PDF.'],
- ['Không thể giới hạn loại tệp khi tìm kiếm.',false,'Có thể giới hạn loại tệp bằng filetype:.'],
- ['Có thể thu hẹp phạm vi tìm kiếm bằng các toán tử.',true,'Các toán tử như filetype:, dấu nháy kép giúp thu hẹp phạm vi.'],
+ ['Dấu nháy kép dùng để tìm chính xác cụm từ.',true,'Đặt cụm từ trong dấu nháy kép.'],
+ ['filetype:pdf dùng để tìm tệp PDF.',true,'filetype:pdf tìm tệp PDF.'],
+ ['Không thể giới hạn loại tệp khi tìm kiếm.',false,'Có thể giới hạn bằng filetype:.'],
+ ['Có thể thu hẹp phạm vi tìm kiếm bằng các toán tử.',true,'Toán tử giúp thu hẹp phạm vi.'],
 ]],
 ['tf7-03',7,'TH','Đánh giá các nhận định sau về kết quả tìm kiếm:',[
- ['Kết quả tìm kiếm có thể là tin tức, hình ảnh, video.',true,'Có thể phân loại kết quả tìm kiếm theo dạng.'],
- ['Kết quả tìm kiếm luôn chính xác 100%.',false,'Kết quả tìm kiếm có thể chưa chính xác, cần kiểm chứng.'],
+ ['Kết quả tìm kiếm có thể là tin tức, hình ảnh, video.',true,'Có thể phân loại kết quả.'],
+ ['Kết quả tìm kiếm luôn chính xác 100%.',false,'Cần kiểm chứng.'],
  ['Có thể thay đổi từ khoá để có kết quả tốt hơn.',true,'Thay đổi từ khoá để có kết quả tốt hơn.'],
- ['Kết quả tìm kiếm không phụ thuộc vào từ khoá.',false,'Kết quả tìm kiếm phụ thuộc vào từ khoá.'],
+ ['Kết quả tìm kiếm không phụ thuộc vào từ khoá.',false,'Phụ thuộc vào từ khoá.'],
 ]],
 ['tf7-04',7,'TH','Đánh giá các nhận định sau về tìm kiếm bằng tiếng nói:',[
- ['Cần micro để tìm kiếm bằng tiếng nói.',true,'Tìm kiếm bằng tiếng nói cần micro.'],
- ['Biểu tượng micro trên thanh tìm kiếm dùng để tìm kiếm bằng giọng nói.',true,'Nháy chuột vào biểu tượng micro để tìm kiếm bằng giọng nói.'],
- ['Tìm kiếm bằng tiếng nói không cần Internet.',false,'Tìm kiếm bằng tiếng nói cần Internet.'],
- ['Có thể kiểm tra lại từ khoá sau khi tìm kiếm bằng tiếng nói.',true,'Có thể kiểm tra từ khoá được tự động điền sau khi đọc.'],
+ ['Cần micro để tìm kiếm bằng tiếng nói.',true,'Cần micro để tìm kiếm bằng tiếng nói.'],
+ ['Biểu tượng micro trên thanh tìm kiếm dùng để tìm kiếm bằng giọng nói.',true,'Nháy biểu tượng micro.'],
+ ['Tìm kiếm bằng tiếng nói không cần Internet.',false,'Cần Internet.'],
+ ['Có thể kiểm tra lại từ khoá sau khi tìm kiếm bằng tiếng nói.',true,'Có thể kiểm tra từ khoá.'],
 ]],
 ['tf7-05',7,'TH','Đánh giá các nhận định sau về máy tìm kiếm:',[
- ['Google, Bing, Yahoo là các máy tìm kiếm.',true,'Đây đều là các máy tìm kiếm.'],
- ['Máy tìm kiếm chỉ tìm được văn bản, không tìm được hình ảnh.',false,'Máy tìm kiếm có thể tìm được hình ảnh, video, tin tức.'],
- ['Máy tìm kiếm giúp tìm thông tin nhanh chóng.',true,'Đây là ưu điểm của máy tìm kiếm.'],
- ['Mọi thông tin trên Internet đều có thể tìm thấy bằng máy tìm kiếm.',false,'Không phải mọi thông tin đều được lập chỉ mục và tìm thấy.'],
+ ['Google, Bing, Yahoo là các máy tìm kiếm.',true,'Đều là các máy tìm kiếm.'],
+ ['Máy tìm kiếm chỉ tìm được văn bản, không tìm được hình ảnh.',false,'Có thể tìm được hình ảnh, video.'],
+ ['Máy tìm kiếm giúp tìm thông tin nhanh chóng.',true,'Đây là ưu điểm.'],
+ ['Mọi thông tin trên Internet đều có thể tìm thấy bằng máy tìm kiếm.',false,'Không phải mọi thông tin đều tìm thấy.'],
 ]],
-
-// ---------- BÀI 8 ----------
 ['tf8-01',8,'TH','Đánh giá các nhận định sau về Gmail:',[
- ['Gmail là dịch vụ thư điện tử của Google.',true,'Gmail là dịch vụ thư điện tử của Google.'],
- ['Gmail không thể đánh dấu thư quan trọng.',false,'Gmail cho phép đánh dấu thư quan trọng.'],
- ['Gmail cho phép tạo nhãn để phân loại thư.',true,'Gmail cho phép tạo nhãn để phân loại thư.'],
- ['Lệnh is:important tìm tất cả thư quan trọng.',true,'is:important tìm tất cả thư quan trọng.'],
+ ['Gmail là dịch vụ thư điện tử của Google.',true,'Gmail là dịch vụ thư điện tử.'],
+ ['Gmail không thể đánh dấu thư quan trọng.',false,'Có thể đánh dấu thư quan trọng.'],
+ ['Gmail cho phép tạo nhãn để phân loại thư.',true,'Có thể tạo nhãn.'],
+ ['Lệnh is:important tìm tất cả thư quan trọng.',true,'is:important tìm thư quan trọng.'],
 ]],
 ['tf8-02',8,'TH','Đánh giá các nhận định sau về nhãn trong Gmail:',[
  ['Nhãn dùng để phân loại thư.',true,'Nhãn dùng để phân loại thư.'],
- ['Một thư có thể có nhiều nhãn.',true,'Một thư có thể được gán nhiều nhãn.'],
- ['Nhãn giống hệt thư mục trong máy tính.',false,'Nhãn khác thư mục: khi xoá thư, thư bị xoá khỏi mọi nhãn.'],
- ['Khi xoá thư, thư bị xoá khỏi mọi nhãn.',true,'Khi xoá thư, thư bị xoá khỏi mọi nhãn đính kèm.'],
+ ['Một thư có thể có nhiều nhãn.',true,'Một thư có thể có nhiều nhãn.'],
+ ['Nhãn giống hệt thư mục trong máy tính.',false,'Nhãn khác thư mục.'],
+ ['Khi xoá thư, thư bị xoá khỏi mọi nhãn.',true,'Khi xoá thư, thư bị xoá khỏi mọi nhãn.'],
 ]],
 ['tf8-03',8,'TH','Đánh giá các nhận định sau về Facebook:',[
  ['Facebook là mạng xã hội phổ biến.',true,'Facebook là mạng xã hội phổ biến.'],
- ['Fanpage là trang dùng để quảng bá thương hiệu.',true,'Fanpage dùng để quảng bá hình ảnh, thương hiệu, sản phẩm.'],
- ['Không thể cài đặt quyền riêng tư trên Facebook.',false,'Facebook cho phép cài đặt quyền riêng tư.'],
- ['Có thể chọn người xem bài viết trên Facebook.',true,'Có thể chọn công khai, bạn bè, chỉ mình tôi, ...'],
+ ['Fanpage là trang dùng để quảng bá thương hiệu.',true,'Fanpage dùng để quảng bá thương hiệu.'],
+ ['Không thể cài đặt quyền riêng tư trên Facebook.',false,'Có thể cài đặt quyền riêng tư.'],
+ ['Có thể chọn người xem bài viết trên Facebook.',true,'Có thể chọn người xem.'],
 ]],
 ['tf8-04',8,'TH','Đánh giá các nhận định sau về quyền riêng tư trên Facebook:',[
- ['"Công khai" cho phép mọi người xem bài viết.',true,'"Công khai" cho phép mọi người xem.'],
- ['"Chỉ mình tôi" chỉ cho phép mình xem.',true,'"Chỉ mình tôi" chỉ cho phép mình xem.'],
- ['Không thể thay đổi quyền riêng tư sau khi đăng bài.',false,'Có thể thay đổi quyền riêng tư sau khi đăng bài.'],
- ['Cần bảo vệ tài khoản mạng xã hội bằng mật khẩu mạnh.',true,'Cần bảo vệ tài khoản bằng mật khẩu mạnh.'],
+ ['"Công khai" cho phép mọi người xem bài viết.',true,'"Công khai" = mọi người đều xem.'],
+ ['"Chỉ mình tôi" chỉ cho phép mình xem.',true,'"Chỉ mình tôi" = chỉ mình xem.'],
+ ['Không thể thay đổi quyền riêng tư sau khi đăng bài.',false,'Có thể thay đổi.'],
+ ['Cần bảo vệ tài khoản mạng xã hội bằng mật khẩu mạnh.',true,'Cần bảo vệ bằng mật khẩu mạnh.'],
 ]],
 ['tf8-05',8,'TH','Đánh giá các nhận định sau về an toàn mạng xã hội:',[
- ['Không nên chia sẻ mật khẩu cho người khác.',true,'Không nên chia sẻ mật khẩu cho bất kỳ ai.'],
- ['Có thể chia sẻ mọi thông tin cá nhân lên mạng xã hội.',false,'Không nên chia sẻ thông tin cá nhân nhạy cảm lên mạng xã hội.'],
- ['Cần kiểm tra quyền riêng tư trước khi đăng bài.',true,'Cần kiểm tra quyền riêng tư trước khi đăng bài.'],
- ['Nên đăng xuất khỏi tài khoản khi dùng máy tính công cộng.',true,'Nên đăng xuất khi dùng máy tính công cộng để bảo mật.'],
+ ['Không nên chia sẻ mật khẩu cho người khác.',true,'Không nên chia sẻ mật khẩu.'],
+ ['Có thể chia sẻ mọi thông tin cá nhân lên mạng xã hội.',false,'Không nên chia sẻ thông tin nhạy cảm.'],
+ ['Cần kiểm tra quyền riêng tư trước khi đăng bài.',true,'Cần kiểm tra quyền riêng tư.'],
+ ['Nên đăng xuất khỏi tài khoản khi dùng máy tính công cộng.',true,'Nên đăng xuất để bảo mật.'],
 ]],
 ];
-
-/* ============================================================
-   APP LOGIC
-   ============================================================ */
 
 const LESSONS = [
   {n:1,t:'Hệ điều hành'},
@@ -1602,6 +1732,7 @@ const App = {
   state:null,
   timerInt:null,
   history:[],
+  bin:null,
 
   init(){
     this.loadHistory();
@@ -1612,7 +1743,6 @@ const App = {
     window.addEventListener('resize', ()=>{ if(this.state) this.renderQNav(); });
   },
 
-  /* ----- Theme ----- */
   getTheme(){ try{return localStorage.getItem('TQT-theme')||'dark'}catch(e){return 'dark'} },
   saveTheme(t){ try{localStorage.setItem('TQT-theme',t)}catch(e){} },
   applyTheme(t){
@@ -1629,7 +1759,6 @@ const App = {
     this.toast(nxt === 'dark' ? 'Đã chuyển sang giao diện tối' : 'Đã chuyển sang giao diện sáng');
   },
 
-  /* ----- History / Stats ----- */
   loadHistory(){
     try{
       const raw = localStorage.getItem('TQT-history');
@@ -1665,7 +1794,6 @@ const App = {
     ]);
   },
 
-  /* ----- Filters ----- */
   setFilter(type,val){
     this.filters[type] = val;
     document.querySelectorAll(`.chip[data-filter="${type}"]`).forEach(c=>{
@@ -1693,7 +1821,6 @@ const App = {
     }).join('');
   },
 
-  /* ----- Navigation ----- */
   goHome(){
     this.stopTimer();
     this.showScreen('home');
@@ -1716,7 +1843,6 @@ const App = {
     window.scrollTo({top:0,behavior:'auto'});
   },
 
-  /* ----- Question selection ----- */
   shuffle(arr){
     const a = arr.slice();
     for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}
@@ -1803,7 +1929,6 @@ const App = {
     this.renderQuiz();
   },
 
-  /* ----- Timer ----- */
   startTimer(){
     this.stopTimer();
     const el = document.getElementById('quiz-timer');
@@ -1935,7 +2060,6 @@ const App = {
       const isFlag = this.state.marked.has(qid);
       return `<button class="qnav-dot ${hasAns?'answered':''} ${isCur?'current':''} ${isFlag?'flagged':''}" onclick="App.gotoQ(${idx})" title="Câu ${idx+1}" aria-label="Đi tới câu ${idx+1}">${idx+1}</button>`;
     }).join('');
-    // Auto-scroll current dot into view on mobile
     if(window.innerWidth <= 768 && nav.scrollWidth > nav.clientWidth){
       const cur = nav.querySelector('.qnav-dot.current');
       if(cur){
@@ -1984,9 +2108,7 @@ const App = {
     this.state.currentIndex = idx;
     this.renderQuiz();
     const card = document.getElementById('qcard');
-    if(card){
-      try { card.scrollIntoView({behavior:'smooth',block:'start'}); } catch(e){}
-    }
+    if(card){ try { card.scrollIntoView({behavior:'smooth',block:'start'}); } catch(e){} }
   },
   nextQ(){ this.gotoQ(this.state.currentIndex + 1); },
   prevQ(){ this.gotoQ(this.state.currentIndex - 1); },
@@ -2022,8 +2144,7 @@ const App = {
     const lessonStats = {};
 
     s.mcQuestions.forEach(q=>{
-      const qid = q[0];
-      mcTotal++;
+      const qid = q[0]; mcTotal++;
       const ans = s.answers[qid];
       const correct = ans === q[5];
       if(correct) mcCorrect++;
@@ -2185,17 +2306,11 @@ const App = {
   retry(){
     if(!this.state) { this.goHome(); return; }
     const s = this.state;
-    // Replay same questions with fresh answers
     this.state = {
-      mode: s.mode,
-      phase: s.phase,
-      mcQuestions: s.mcQuestions,
-      tfQuestions: s.tfQuestions,
-      answers: {},
-      currentIndex: 0,
-      marked: new Set(),
-      startTime: Date.now(),
-      order: s.order
+      mode: s.mode, phase: s.phase,
+      mcQuestions: s.mcQuestions, tfQuestions: s.tfQuestions,
+      answers: {}, currentIndex: 0, marked: new Set(),
+      startTime: Date.now(), order: s.order
     };
     this.showScreen('quiz');
     document.getElementById('quiz-mode-label').textContent = {
@@ -2209,6 +2324,312 @@ const App = {
     this.startMode(this.state.mode);
   },
 
+  /* ============================================================
+     BINARY PRACTICE
+     ============================================================ */
+  loadBinaryStats(){
+    try{
+      const raw = localStorage.getItem('TQT-binary');
+      if(raw){
+        const s = JSON.parse(raw);
+        this.bin.correctCount = s.correctCount || 0;
+        this.bin.totalCount = s.totalCount || 0;
+        this.bin.streak = s.streak || 0;
+      }
+    }catch(e){}
+  },
+  saveBinaryStats(){
+    try{
+      localStorage.setItem('TQT-binary', JSON.stringify({
+        correctCount: this.bin.correctCount,
+        totalCount: this.bin.totalCount,
+        streak: this.bin.streak
+      }));
+    }catch(e){}
+  },
+
+  openBinary(){
+    this.stopTimer();
+    if(!this.bin){
+      this.bin = {
+        difficulty:'easy',
+        problem:null,
+        userBits:[],
+        submitted:false,
+        correctCount:0,
+        totalCount:0,
+        streak:0
+      };
+      this.loadBinaryStats();
+    }
+    this.showScreen('binary');
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('[data-bin-diff]').forEach(c=>{
+      c.classList.toggle('active', c.dataset.binDiff === this.bin.difficulty);
+    });
+    this.newBinaryProblem();
+  },
+
+  setBinaryDifficulty(d){
+    if(!this.bin) this.bin = { difficulty:d, correctCount:0, totalCount:0, streak:0 };
+    this.bin.difficulty = d;
+    document.querySelectorAll('[data-bin-diff]').forEach(c=>{
+      c.classList.toggle('active', c.dataset.binDiff === d);
+    });
+    this.newBinaryProblem();
+  },
+
+  newBinaryProblem(){
+    const d = this.bin.difficulty;
+    let maxVal;
+    if(d === 'easy') maxVal = 7;
+    else if(d === 'medium') maxVal = 15;
+    else maxVal = 31;
+    let a, b;
+    do {
+      a = 1 + Math.floor(Math.random() * maxVal);
+      b = 1 + Math.floor(Math.random() * maxVal);
+    } while (a + b < 2);
+    const problem = this.computeAddition(a, b);
+    this.bin.problem = problem;
+    this.bin.userBits = new Array(problem.cols).fill('0');
+    this.bin.submitted = false;
+    this.renderBinaryProblem();
+    const fb = document.getElementById('bin-feedback-container');
+    if(fb) fb.innerHTML = '';
+  },
+
+  computeAddition(a, b){
+    const aBin = a.toString(2);
+    const bBin = b.toString(2);
+    const sum = a + b;
+    const sumBin = sum.toString(2);
+    const cols = Math.max(aBin.length, bBin.length, sumBin.length);
+    const aPad = aBin.padStart(cols, '0');
+    const bPad = bBin.padStart(cols, '0');
+    const sPad = sumBin.padStart(cols, '0');
+    const steps = [];
+    let carry = 0;
+    for(let j = 0; j < cols; j++){
+      const idx = cols - 1 - j;
+      const aBit = parseInt(aPad[idx]);
+      const bBit = parseInt(bPad[idx]);
+      const carryIn = carry;
+      const total = aBit + bBit + carryIn;
+      const sumBit = total % 2;
+      const carryOut = Math.floor(total / 2);
+      steps.push({ j, idx, aBit, bBit, carryIn, total, sumBit, carryOut });
+      carry = carryOut;
+    }
+    return { a, b, sum, cols, aPad, bPad, sPad, steps };
+  },
+
+  renderBinaryProblem(){
+    if(!this.bin) return;
+    const p = this.bin.problem;
+    const userBits = this.bin.userBits;
+    const submitted = this.bin.submitted;
+    const container = document.getElementById('bin-problem-container');
+
+    const gridStyle = `grid-template-columns: 36px repeat(${p.cols}, minmax(40px, 1fr))`;
+    let html = `<div class="bin-problem-card">
+      <div class="bin-problem-desc">
+        Thực hiện phép cộng: <strong>${p.a}₁₀ + ${p.b}₁₀</strong>
+        = <strong>${p.aPad}₂ + ${p.bPad}₂</strong>
+      </div>
+      <div class="bin-grid" style="${gridStyle}">`;
+
+    // Carry row
+    html += `<div class="bin-cell label" style="font-size:.7rem;color:var(--warn)">nhớ</div>`;
+    for(let pos = 0; pos < p.cols; pos++){
+      const j = p.cols - 1 - pos;
+      const step = p.steps[j];
+      let carryShown = '';
+      if(submitted && step.carryIn) carryShown = String(step.carryIn);
+      html += `<div class="bin-cell carry">${carryShown}</div>`;
+    }
+
+    // Operand A
+    html += `<div class="bin-cell label">A</div>`;
+    for(let pos = 0; pos < p.cols; pos++){
+      html += `<div class="bin-cell operand">${p.aPad[pos]}</div>`;
+    }
+
+    // Operand B
+    html += `<div class="bin-cell label plus">+</div>`;
+    for(let pos = 0; pos < p.cols; pos++){
+      html += `<div class="bin-cell operand">${p.bPad[pos]}</div>`;
+    }
+
+    // Divider
+    html += `<div class="bin-divider"></div>`;
+
+    // Answer cells
+    html += `<div class="bin-cell label">=</div>`;
+    for(let pos = 0; pos < p.cols; pos++){
+      const bit = userBits[pos];
+      const correctBit = p.sPad[pos];
+      let cls = 'answer';
+      if(submitted){
+        if(bit === correctBit) cls += ' correct';
+        else cls += ' wrong';
+      } else if(bit !== '0'){
+        cls += ' filled';
+      }
+      const clickHandler = submitted ? '' : `onclick="App.toggleBinaryBit(${pos})"`;
+      html += `<button class="bin-cell ${cls}" ${clickHandler} ${submitted ? 'disabled' : ''} aria-label="Bit ${pos+1}">${bit}</button>`;
+    }
+
+    html += `</div>`;
+
+    if(!submitted){
+      html += `<p class="bin-hint">Nhấp vào ô để đổi 0 ↔ 1. Cần điền <code>${p.cols}</code> bit.</p>`;
+    } else {
+      html += `<p class="bin-hint" style="margin-top:14px;color:var(--t1)">
+        Đáp án đúng: <code style="color:var(--ok)">${p.sPad}</code> = <strong style="color:var(--ok)">${p.sum}₁₀</strong>
+      </p>`;
+    }
+    html += `</div>`;
+    container.innerHTML = html;
+
+    const actions = document.getElementById('bin-actions');
+    if(!submitted){
+      actions.innerHTML = `
+        <button class="btn btn-ghost btn-sm" onclick="App.newBinaryProblem()">Đề mới</button>
+        <button class="btn btn-primary" onclick="App.submitBinary()">Kiểm tra đáp án</button>
+      `;
+    } else {
+      actions.innerHTML = `
+        <button class="btn btn-secondary" onclick="App.newBinaryProblem()">Đề tiếp theo →</button>
+      `;
+    }
+
+    const setEl = (id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
+    setEl('bin-correct', this.bin.correctCount);
+    setEl('bin-total', this.bin.totalCount);
+    setEl('bin-streak', this.bin.streak);
+  },
+
+  toggleBinaryBit(pos){
+    if(!this.bin || this.bin.submitted) return;
+    this.bin.userBits[pos] = this.bin.userBits[pos] === '0' ? '1' : '0';
+    this.renderBinaryProblem();
+  },
+
+  submitBinary(){
+    if(!this.bin || this.bin.submitted) return;
+    this.bin.submitted = true;
+    const p = this.bin.problem;
+    const userStr = this.bin.userBits.join('');
+    const isCorrect = userStr === p.sPad;
+    this.bin.totalCount++;
+    if(isCorrect){ this.bin.correctCount++; this.bin.streak++; }
+    else { this.bin.streak = 0; }
+    this.saveBinaryStats();
+    this.renderBinaryProblem();
+    this.renderBinaryFeedback(isCorrect);
+    setTimeout(()=>{
+      const fb = document.getElementById('bin-feedback-container');
+      if(fb) fb.scrollIntoView({behavior:'smooth',block:'start'});
+    }, 150);
+  },
+
+  renderBinaryFeedback(isCorrect){
+    const p = this.bin.problem;
+    const userBits = this.bin.userBits;
+    const fb = document.getElementById('bin-feedback-container');
+    if(!fb) return;
+
+    if(isCorrect){
+      fb.innerHTML = `
+        <div class="bin-feedback correct">
+          <h3 class="ok">✓ Chính xác!</h3>
+          <p class="fb-msg">
+            ${p.a}₁₀ + ${p.b}₁₀ = ${p.sum}₁₀, tức <code>${p.aPad}₂</code> + <code>${p.bPad}₂</code> = <code>${p.sPad}₂</code>.
+            Cùng xem lại từng bước để ghi nhớ:
+          </p>
+          <div class="bin-steps">
+            ${this.buildStepsHtml(true)}
+          </div>
+        </div>`;
+    } else {
+      const wrongCount = userBits.reduce((c,b,i)=>c+(b===p.sPad[i]?0:1),0);
+      fb.innerHTML = `
+        <div class="bin-feedback wrong">
+          <h3 class="bad">✗ Chưa đúng (${wrongCount} bit sai)</h3>
+          <p class="fb-msg">
+            Bạn đã điền <code style="color:var(--bad)">${userBits.join('')}</code>,
+            đáp án đúng là <code style="color:var(--ok)">${p.sPad}</code> = <strong>${p.sum}₁₀</strong>.
+          </p>
+          <p class="fb-msg">
+            <strong>Vì sao sai?</strong> Xem chi tiết từng cột dưới đây (tính từ <strong>phải sang trái</strong>).
+            Cột nào có dấu <span style="color:var(--bad);font-weight:700">✗</span> là cột bạn tính chưa đúng.
+            Quy tắc cần nhớ: <code>1 + 1 = 10₂</code> (viết 0, nhớ 1); <code>1 + 1 + 1 = 11₂</code> (viết 1, nhớ 1).
+          </p>
+          <div class="bin-steps">
+            ${this.buildStepsHtml(true)}
+          </div>
+        </div>`;
+    }
+  },
+
+  buildStepsHtml(showErrors){
+    const p = this.bin.problem;
+    const userBits = this.bin.userBits;
+    const letters = ['(phải nhất)','(thứ 2)','(thứ 3)','(thứ 4)','(thứ 5)','(thứ 6)'];
+    let html = '';
+    for(let j = 0; j < p.cols; j++){
+      const step = p.steps[j];
+      const pos = p.cols - 1 - j;
+      const userBit = userBits[pos];
+      const correctBit = p.sPad[pos];
+      const isCorrect = userBit === correctBit;
+
+      let calc;
+      if(step.carryIn === 0){
+        calc = `${step.aBit} + ${step.bBit}`;
+      } else {
+        calc = `${step.aBit} + ${step.bBit} + ${step.carryIn}`;
+      }
+      const totalBin = step.total === 0 ? '0' : step.total.toString(2);
+
+      let detail = '';
+      if(step.total === 0){
+        detail = `Tổng = 0 → viết <strong>0</strong>, nhớ 0.`;
+      } else if(step.total === 1){
+        detail = `Tổng = 1 → viết <strong>1</strong>, nhớ 0.`;
+      } else if(step.total === 2){
+        detail = `Tổng = 2 = 10₂ → viết <strong>0</strong>, nhớ <strong>1</strong> sang cột bên trái.`;
+      } else if(step.total === 3){
+        detail = `Tổng = 3 = 11₂ → viết <strong>1</strong>, nhớ <strong>1</strong> sang cột bên trái.`;
+      }
+
+      let mark = '';
+      let rowClass = 'ok';
+      if(showErrors){
+        if(isCorrect){
+          mark = `<span class="mark ok">✓</span>`;
+        } else {
+          mark = `<span class="mark bad">✗</span>`;
+          rowClass = 'bad';
+          detail += ` <span class="warn-text">Bạn đã viết ${userBit} thay vì ${correctBit}.</span>`;
+        }
+      }
+
+      html += `<div class="bin-step ${rowClass}">
+        <div class="step-header">
+          <strong>Cột ${j + 1} ${letters[j] || ''}: ${calc} = ${step.total} = ${totalBin}₂</strong>
+          ${mark}
+        </div>
+        <div class="step-detail">${detail}</div>
+      </div>`;
+    }
+    return html;
+  },
+
+  /* ============================================================
+     MODAL / TOAST / UTILS
+     ============================================================ */
   showModal(title, msg, actions){
     document.getElementById('modal-title').textContent = title;
     document.getElementById('modal-msg').textContent = msg;
@@ -2226,7 +2647,6 @@ const App = {
   closeModal(){
     document.getElementById('modal').classList.remove('show');
   },
-
   toast(msg){
     const el = document.getElementById('toast');
     el.textContent = msg;
@@ -2234,7 +2654,6 @@ const App = {
     clearTimeout(this._toastT);
     this._toastT = setTimeout(()=>el.classList.remove('show'), 2400);
   },
-
   esc(s){
     return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   },
